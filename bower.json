@@ -14,7 +14,8 @@
     "masonry": "^4.0.0",
     "imgLiquid": "^0.9.944",
     "isotope": "^2.2.2",
-    "font-awesome": "fontawesome#^4.5.0"
+    "font-awesome": "fontawesome#^4.5.0",
+    "slick-carousel": "slick.js#^1.5.9"
   },
   "ignore": [
     "**/.*",

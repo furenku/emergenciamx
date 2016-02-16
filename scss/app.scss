@@ -69,9 +69,9 @@
 
    .punto-tiempo {
       border: 2px solid white;
-      width: $spacing*1.5;
-      height: $spacing*1.5;
-      border-radius: $spacing*1.5;
+      width: $spacing*1.2;
+      height: $spacing*1.2;
+      border-radius: $spacing*1.2;
       display: block;
    }
 }
@@ -90,6 +90,10 @@ body {
    color: #fff;
    .punto-tiempo {
       border: 2px solid white;
+
+      &.activo {
+         background-color: #fff;
+      }
    }
 }
 

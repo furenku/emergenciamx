@@ -20,7 +20,7 @@ $(document).ready(function(){
       var linea = $('#linea-de-tiempo-fondo');
 
       if( linea.hasClass('hidden') ) {
-         var linea = $('#linea-de-tiempo');         
+         var linea = $('#linea-de-tiempo');
       }
 
       var posicionLineaDeTiempo = linea.offset().top+$(this).scrollTop() - $('#linea-de-tiempo').height();
@@ -52,6 +52,11 @@ $(document).ready(function(){
    })
    $('.imgLiquid.imgLiquidFill').imgLiquid();
    $('.imgLiquid.imgLiquidNoFill').imgLiquid({fill:false});
+
+
+   $('#portada_fondo').slick({
+      fade:true,autoplay:true
+   })
 
    $('#entradas').isotope({
       masonry: {

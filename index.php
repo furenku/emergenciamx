@@ -6,6 +6,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Foundation for Sites</title>
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,300' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
    <link rel="stylesheet" href="css/app.css">
 </head>
@@ -29,11 +31,17 @@
       <!-- #mostrar_menu.small-3.medium-2.large-1.columns.text-center>span.fa.fa-bars.fontXL -->
       <div id="mostrar_menu" class="small-3 small-offset-6 hide-for-medium-up columns text-center h_100"><span class="fa fa-bars fontXL vcenter columns"></span></div>
    </header>
+
    <div class="xrow main-scroller h_100vh scrollH">
 
-      <div id="portada" class="xrow h_90vh rel">
-         <div id="portada_fondo" class="imgLiquid imgLiquidFill absUpL w_100 h_100 z-1">
-            <img src="http://fakeimg.pl/1200x350" alt="">
+      <div id="portada" class="xrow h_75vh rel">
+         <div id="portada_fondo" class="absUpL w_100 h_100 z-1">
+            <?php for ($i=0; $i < 6; $i++) : ?>
+               <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh">
+                  <img src="http://placeimg.com/<?php echo rand(1000,1200); ?>/<?php echo rand(350,450); ?>/people?random="<?php echo $i ?> alt=""/>
+                  <!-- <img src="http://placeimg.com/1200/350/people" alt=""> -->
+               </div>
+            <?php endfor; ?>
          </div>
          <div id="portada_cortina" class="cortina absUpL w_100 h_100 z0"></div>
          <div class="w_100 vcenter text-center absUpL">
@@ -44,7 +52,7 @@
                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   </p>
                </div>
-               <div class="medium-6 columns">
+               <div class="medium-6 columns">loremflickr
                   <p>
                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   </p>
@@ -54,17 +62,17 @@
       </div>
 
       <div id="linea-de-tiempo-fondo" class="xrow h_10vh text-center p0 hidden">
-
+loremflickr
       </div>
       <div id="linea-de-tiempo" class="xrow h_10vh text-center p0">
-         <?php for ($i=0; $i < 5; $i++) : ?>
+         <?php for ($i=0; $i < 6; $i++) : ?>
 
-            <div class="selector-tiempo shareW fl p2">
+            <div class="selector-tiempo shareW fl p0">
                <span class="texto-tiempo fontL uppercase row m0">
-                  <?php echo 2011 + $i;  ?>
+                  <?php echo $i < 5 ? (2011 + $i) : 'Más';  ?>
                </span>
                <div class="punto-tiempo-contenedor row">
-                  <span class="punto-tiempo small-centered"></span>
+                  <?php echo $i < 5 ? '<span class="punto-tiempo small-centered"></span>' : '<span class="fa fa-angle-right fontXL"></span>'; ?>
                </div>
             </div>
 
@@ -77,7 +85,9 @@
 
             <div class="entrada rel medium-<?php echo (($i%2)+1)*2; ?> h_<?php echo (($i%2)+2)*10; ?>vh columns">
                <div class="imgLiquid imgLiquidFill w_100 h_100">
-                  <img src="http://fakeimg.pl/<?php echo (ceil( rand(4,9) * 40 ) . "x" . ceil( rand(4,7) * 60 ));  ?>" alt=""/>
+                  <img src="http://placeimg.com/<?php echo (ceil( rand(4,9) * 40 ) . "/" . ceil( rand(4,7) * 60 ));  ?>/people?random=<?php echo $i; ?>" alt=""/>
+                  <!-- <img src="http://loremflickr.com/<?php echo (ceil( rand(4,9) * 40 ) . "/" . ceil( rand(4,7) * 60 ));  ?>/subversiones?random=<?php echo $i; ?>" alt=""/> -->
+                  <!-- <img src="http://fakeimg.pl/<?php echo (ceil( rand(4,9) * 40 ) . "x" . ceil( rand(4,7) * 60 ));  ?>/<?php echo dechex( rand(0,255) ) . dechex( rand(0,255) ) . dechex( rand(0,255) ) ?>" alt=""/> -->
                </div>
             </div>
 
@@ -92,6 +102,7 @@
    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
    <script src="bower_components/isotope/dist/isotope.pkgd.min.js"></script>
    <script src="bower_components/imgLiquid/js/imgLiquid-min.js"></script>
+   <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
    <script src="js/frontendutils.js"></script>
    <script src="js/app.js"></script>
 </body>
