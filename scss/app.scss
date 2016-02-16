@@ -1,0 +1,107 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+@import 'motion-ui';
+@import 'layout_utils';
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-close-button;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-flex-video;
+@include foundation-label;
+@include foundation-media-object;
+@include foundation-menu;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+
+
+#entradas {
+   .entrada {
+      padding: 1px;
+   }
+}
+
+
+#portada_cortina {
+   background-color: #fff;
+   opacity: 0.5;
+}
+
+
+
+
+
+#linea-de-tiempo {
+
+   z-index: 1;
+   background-color: #666;
+
+   .punto-tiempo {
+      border: 2px solid white;
+      width: $spacing*1.5;
+      height: $spacing*1.5;
+      border-radius: $spacing*1.5;
+      display: block;
+   }
+}
+/*COLORES*/
+
+body {
+   background-color: #000;
+}
+#cabecera {
+   background-color: #000;
+   color: #fff;
+}
+
+#linea-de-tiempo {
+   background-color: #555;
+   color: #fff;
+   .punto-tiempo {
+      border: 2px solid white;
+   }
+}
+
+
+
+/*   tipografias */
+
+* {
+   font-family: 'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+   font-family: 'Open Sans', sans-serif !important;
+   font-weight: 700;
+}
