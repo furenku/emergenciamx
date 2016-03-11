@@ -4483,8 +4483,10 @@ table.hover tr:nth-of-type(even):hover {
 
 #entradas .entrada {
   padding: 1px; }
+  #entradas .entrada:hover .info {
+    display: block; }
 
-#portada_cortina {
+.cortina {
   background-color: #fff;
   opacity: 0.5; }
 
@@ -4505,6 +4507,8 @@ body {
 #cabecera {
   background-color: #000;
   color: #fff; }
+  #cabecera a {
+    color: #fff; }
 
 #linea-de-tiempo {
   background-color: #555;

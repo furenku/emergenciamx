@@ -49,11 +49,17 @@
 #entradas {
    .entrada {
       padding: 1px;
+
+      &:hover {
+         .info {
+            display: block;
+         }
+      }
    }
 }
 
 
-#portada_cortina {
+.cortina {
    background-color: #fff;
    opacity: 0.5;
 }
@@ -76,11 +82,13 @@
    }
 }
 /*COLORES*/
-
 body {
    background-color: #000;
 }
 #cabecera {
+   a {
+      color: #fff;
+   }
    background-color: #000;
    color: #fff;
 }
