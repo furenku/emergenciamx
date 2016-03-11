@@ -45,10 +45,10 @@
    <?php endfor; ?>
 </div>
 
-<div id="entradas" class="row">
+<div id="entradas" class="xrow">
 
    <?php
-   $args = array('post_type'=>'post','category_name' =̣> 'videos' );
+   $args = array('post_type'=>'video','posts_per_page'=>-1,'category_name'=>'videos');
    $q = new WP_Query($args);
 
    if($q->have_posts()):

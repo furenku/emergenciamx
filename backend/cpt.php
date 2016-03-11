@@ -28,7 +28,7 @@ function cpt_video() {
 
 	$args = array(
 		'labels'             => $labels,
-                'description'        => __( 'Description.', 'emmx-textdomain' ),
+      'description'        => __( 'Description.', 'emmx-textdomain' ),
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
@@ -39,8 +39,9 @@ function cpt_video() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => null,
+      'taxonomies' => array('category'),
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 	);
 
-	register_post_type( 'Video', $args );
+	register_post_type( 'video', $args );
 }
