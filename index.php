@@ -47,27 +47,43 @@
 
 <div id="entradas" class="row">
 
-   <?php for ($i=0; $i < 24; $i++) : ?>
+   <?php
+   $args = array('post_type'=>'post','category_name' =̣> 'videos' );
+   $q = new WP_Query($args);
+
+   if($q->have_posts()):
+      while($q->have_posts()):
+         $q->the_post();
+         ?>
+
+
 
       <div class="entrada rel medium-<?php echo (($i%2)+1)*2; ?> h_<?php echo (($i%2)+2)*10; ?>vh columns">
          <div class="imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
-            <!-- <img src="http://placeimg.com/<?php echo (ceil( rand(4,9) * 40 ) . "/" . ceil( rand(4,7) * 60 ));  ?>/people?random=<?php echo $i; ?>" alt=""/> -->
-            <!-- <img src="http://loremflickr.com/<?php echo (ceil( rand(4,9) * 40 ) . "/" . ceil( rand(4,7) * 60 ));  ?>/environment?random=<?php echo $i; ?>" alt=""/> -->
-            <img src="http://fakeimg.pl/<?php echo (ceil( rand(4,9) * 40 ) . "x" . ceil( rand(4,7) * 60 ));  ?>/<?php echo dechex( rand(0,255) ) . dechex( rand(0,255) ) . dechex( rand(0,255) ) ?>" alt=""/>
+            <?php echo get_the_post_thumbnail(); ?>
          </div>
          <div class="info row h_100 hidden text-center">
             <div class="cortina w_100 h_100 absUpL z0"></div>
             <div class="info_texto w_100 h_100 absUpL z1">
                <div class="vcenter">
-                  <h6>Nombre De la Entrada</h6>
-                  <span class="row"><b>Temática</b></span>
-                  <span class="row" class="fontM">Diciembre 2014</span>
+                  <h6>
+                     <?php echo get_the_title(); ?>
+                  </h6>
+                  <span class="row">
+                     <b></b>
+                  </span>
+                  <span class="row" class="fontM">
+                     <?php echo get_the_date(); ?>
+                  </span>
                </div>
             </div>
          </div>
       </div>
 
-   <?php endfor; ?>
+         <?php
+      endwhile;
+   endif;
+   ?>
 
 </div>
 
