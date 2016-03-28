@@ -99,7 +99,7 @@ class emmx_menu_walker extends Walker_Nav_Menu {
          'uppercase',
          'fwb',
          'vcenter',
-         'fontS',
+         'fontM',
          'p0',
          'fl',
          'w_sm_100',

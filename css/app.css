@@ -4517,7 +4517,7 @@ table.hover tr:nth-of-type(even):hover {
 #linea-de-tiempo {
   z-index: 1;
   background-color: #111 !important;
-  color: #ddd;
+  color: #ccc;
   font-weight: 700 !important; }
 
 /*COLORES*/
@@ -4537,7 +4537,7 @@ body {
     width: auto;
     list-style: none !important; }
     #cabecera nav li, #cabecera nav li * {
-      color: #ddd !important; }
+      color: #eee !important; }
 
 /*   tipografias */
 * {
