@@ -9,35 +9,38 @@
    <div class="w_100 text-center absUpL white h_100">
       <div class="small-12  medium-10 medium-centered large-8 large-centered h_100">
          <div class="medium-6 columns text-left titulo vcenter">
-            <h1 class="">Emergencia MX</h1>
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo_grande.png" alt="" />
          </div>
-         <div class="medium-6 columns fontXL text-left texto h_100">
+         <div class="medium-6 columns fontL text-left texto h_100">
             <div class="vcenter">
-               <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sint beatae odio similique fuga ullam, illo quo incidunt aliquid. Dignissimos accusamus doloremque cumque et voluptatum, eum inventore est distinctio magni.
-               </p>
-               <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed rerum consequuntur sapiente alias nostrum! Temporibus.
-               </p>
+               <?php
+               echo apply_filters('the_content', get_page_by_title("Portada") -> post_content);
+               ?>
             </div>
          </div>
       </div>
    </div>
 </div>
 
-<div id="linea-de-tiempo-fondo" class="xrow h_10vh text-center p0 hidden">
+<div id="linea-de-tiempo-fondo" class="xrow h_15vh text-center p0 hidden">
 
 </div>
-<div id="linea-de-tiempo" class="xrow h_10vh text-center p0 pt1">
-   <?php for ($i=0; $i < 6; $i++) : ?>
+<div id="linea-de-tiempo" class="xrow h_10vh text-center p0 ">
+   <?php
+      for ($i=0; $i < 6; $i++) :
+         $anno = $i < 5 ? (2011 + $i) : 'Más';
+   ?>
 
-      <div class="selector-tiempo shareW fl p0">
-         <span class="texto-tiempo fontL uppercase row m0">
-            <?php echo $i < 5 ? (2011 + $i) : 'Más';  ?>
+      <div class="selector-tiempo cursor-pointer shareW vcenter fl" data-anno="<?php echo $anno; ?>">
+
+         <span class="texto-tiempo fontM uppercase row m0">
+            <?php echo $anno;  ?>
          </span>
-         <div class="punto-tiempo-contenedor row">
-            <?php echo $i < 5 ? '<span class="punto-tiempo small-centered"></span>' : '<span class="fa fa-angle-right fontXL"></span>'; ?>
+
+         <div class="punto-tiempo-contenedor cursor-pointer row">
+            <?php echo $i < 5 ? '<span class="punto-tiempo small-centered fa fa-circle"></span>' : '<span class="fa fa-angle-right fontXL"></span>'; ?>
          </div>
+
       </div>
 
    <?php endfor; ?>
@@ -46,7 +49,9 @@
 <div id="videos" class="xrow">
 
    <?php
-   $args = array('post_type'=>'video','posts_per_page'=>-1,'category_name'=>'videos');
+
+   $args = array( 'post_type'=>'video', 'posts_per_page'=>-1, 'category_name'=>'videos' );
+
    $q = new WP_Query($args);
    $i=0;
    if($q->have_posts()):
@@ -56,12 +61,14 @@
          ?>
 
 
+      <?php $anno = date('Y',strtotime($post->post_date)); ?>
 
-      <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns">
+      <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>">
          <a href="<?php echo get_the_permalink(); ?>">
             <div class="imagen imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
-               <?php echo get_the_post_thumbnail(); ?>
+               <?php echo get_the_post_thumbnail(get_the_ID(),'thumb'); ?>
             </div>
+            <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
             <div class="info row h_100 text-center op0">
                <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
                <div class="info_texto w_100 h_100 absDownL z-1 white">

@@ -8,10 +8,7 @@ if( have_posts() ) {
       ?>
 
       <div id="post_<?php echo get_the_ID(); ?>" class="post single xrow h_100vh white_bg p0 m0">
-         <div class="xrow mb1 h_65vh imagen imgLiquid imgLiquidFill">
-            <h1>
-               <?php echo get_the_post_thumbnail(); ?>
-            </h1>
+         <div class="video_holder">
          </div>
          <div class="titulo xrow m2 black p0 m0">
             <h1 class="p4  ">
@@ -32,6 +29,13 @@ if( have_posts() ) {
 } else {
    /* No posts found */
 }
+
+<script>
+
+   $(document).ready(function(){
+      alert(123)
+   })
+</script>
 
 get_footer();
 

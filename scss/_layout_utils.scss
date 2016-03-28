@@ -880,3 +880,42 @@ $screen-lg-min: 1200px;
 		padding: 0;
 	}
 }
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+
+
+.fwb {
+	font-weight: bold;
+}
+
+.fwn {
+	font-weight: normal;
+}
+
+
+
+
+.ha {
+	height: auto !important;
+}
+
+
+.wa {
+	width: auto;
+}
+
+@media screen and ( max-width:768px ) {
+	.w_sm_100 {
+		width: 100% !important;
+	}
+}
+
+@media screen and (min-width:768px) {
+	.wa_md {
+		width: auto !important;
+
+	}
+}

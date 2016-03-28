@@ -11,6 +11,11 @@ $(document).ready(function(){
    u.shareW();
 
 
+   setTimeout(function(){
+      u.vcenter();
+      u.shareW();
+   }, 1000 );
+
    $('.main-scroller').scroll(function(){
       $('#cabecera').animate({opacity:1},500,function() {
          $('#cabecera').removeClass('op0')
@@ -20,12 +25,15 @@ $(document).ready(function(){
       var linea = $('#linea-de-tiempo-fondo');
 
       if( linea.hasClass('hidden') ) {
+
          var linea = $('#linea-de-tiempo');
+
       }
 
       var posicionLineaDeTiempo = linea.offset().top+$(this).scrollTop() - $('#linea-de-tiempo').height();
 
       if( $(this).scrollTop() > posicionLineaDeTiempo ) {
+
          if( ! lineaTiempoFija ) {
 
             $('#linea-de-tiempo').css({
@@ -37,7 +45,9 @@ $(document).ready(function(){
             lineaTiempoFija = true;
          }
       } else {
+
          if( lineaTiempoFija ) {
+
             $('#linea-de-tiempo').css({
                position: 'relative',
                marginTop: 0,
@@ -82,6 +92,67 @@ $(document).ready(function(){
 
    // fix temporal imgs portada
 
+
+
+   // MENU DE AÑOS
+
+   var botonesAnno = $('.selector-tiempo');
+
+   botonesAnno.click(function(){
+
+      var anno = $(this).data('anno');
+
+      $videos_container.isotope({ filter: '[data-anno='+anno+']' });
+
+   })
+
+   if( parseInt( $(window).width() ) < 768 ) {
+      $('nav#menu').detach().insertAfter('#mostrar_menu');
+      var wH = parseInt( $(window).height() ) * 0.9;
+      $('nav#menu').height( wH );
+      $('nav#menu li').height( wH / $('nav#menu li').length );
+      $('nav#menu li').addClass('mt0');
+      $('nav#menu li').each(function(){
+         var newDiv = $('<div>').addClass('vcenter').html( $(this).html() );
+          $(this).html( newDiv );
+      })
+      u.vcenter('nav#menu li')
+
+
+
+      $('#linea-de-tiempo-fondo').removeClass('hidden');
+
+
+
+
+      // css({ marginTop: '0 !important' });
+      // u.vcenter('nav#menu');
+   }
+   $('#mostrar_menu').click(function(){
+
+      var fa =$(this).find('.fa');
+
+      if( fa.hasClass('fa-bars') ) {
+         $('nav#menu').removeClass('hide-for-small-only');
+         fa.removeClass('fa-bars').addClass('fa-close');
+         // $('#cabecera').height('100vh');
+         $('#linea-de-tiempo').css({
+            position: 'relative',
+            marginTop: 0,
+            top: 0
+         })
+      } else {
+         $('nav#menu').addClass('hide-for-small-only');
+         fa.removeClass('fa-close').addClass('fa-bars');
+         // $('#cabecera').height('10vh');
+         $('#linea-de-tiempo').css({
+            position: 'fixed',
+            marginTop: $('#cabecera').height(),
+            top: 0
+         })
+      }
+
+   })
 
 
 })
