@@ -50,7 +50,7 @@
 
    <?php
 
-   $args = array( 'post_type'=>'video', 'posts_per_page'=>-1, 'category_name'=>'videos' );
+   $args = array( 'post_type'=>'video', 'posts_per_page'=>-1 );
 
    $q = new WP_Query($args);
    $i=0;

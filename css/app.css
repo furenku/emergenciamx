@@ -629,6 +629,13 @@
   .wa_md {
     width: auto !important; } }
 
+.ovyh {
+  overflow-y: hidden; }
+
+.p1px {
+  padding-right: 1px !important;
+  padding-bottom: 1px !important; }
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
    * 1. Set default font family to sans-serif.
@@ -4521,9 +4528,6 @@ table.hover tr:nth-of-type(even):hover {
   font-weight: 700 !important; }
 
 /*COLORES*/
-body {
-  background-color: #000; }
-
 #cabecera {
   background-color: #000;
   color: #fff; }
@@ -4580,19 +4584,26 @@ h1, h2, h3, h4, h5, h6 {
     #videos .video:hover .info h6 {
       text-shadow: 1px 1px 0 #000; }
 
-.post.single .titulo {
+.post.single .titulo, .pattern {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwATGtBAAADM2AQCsBUIOAAAAAElFTkSuQmCC) repeat; }
 
-.post.single .imagen {
-  filter: contrast(125%);
-  -webkit-filter: contrast(125%); }
-
-.post.single iframe {
-  width: 100%;
-  height: 65vh; }
-
-.post.single .contenido p {
-  text-align: justify; }
+.post.single {
+  background-color: #fafafa;
+  padding-top: 10vh; }
+  .post.single .imagen {
+    filter: contrast(125%);
+    -webkit-filter: contrast(125%); }
+  .post.single iframe {
+    width: 100%;
+    height: 75vh; }
+  .post.single .titulo {
+    margin-top: -5px !important;
+    margin: 0 !important; }
+  .post.single .contenido p {
+    text-align: justify; }
 
 .cortina {
   opacity: 0.5; }
+
+.red {
+  color: #f00; }
