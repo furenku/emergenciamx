@@ -874,6 +874,14 @@ $screen-lg-min: 1200px;
 	z-index: 1;
 }
 
+.z1k {
+	z-index: 1000;
+}
+
+.z1k1 {
+	z-index: 1001;
+}
+
 
 .p0 {
 	* {
@@ -928,4 +936,47 @@ $screen-lg-min: 1200px;
 .p1px {
 	padding-right: 1px !important;
 	padding-bottom: 1px !important;
+}
+
+
+
+
+$white: #fff;
+$black: #000;
+$primario: #0bc1ed;
+$secundario: #4bd1fd;
+
+$lista_colores: (
+  blanco   $white,
+  negro   $black,
+  gris_oscuro   #111,
+  primario   $primario,
+  secundario $secundario
+);
+
+
+@each $value in $lista_colores {
+
+
+	   .color_#{nth($value, 1)} {
+			color: nth($value, 2) !important;
+	   }
+	   .color_#{nth($value, 1)}_bg {
+			background-color: nth($value, 2) !important;
+	   }
+	   .color_#{nth($value, 1)}_bd {
+			border: nth($value, 2) !important;
+	   }
+
+	   .color_#{nth($value, 1)}_hover:hover {
+			color: nth($value, 2) !important;
+	   }
+	   .color_#{nth($value, 1)}_hover_bg:hover {
+			background-color: nth($value, 2) !important;
+	   }
+	   .color_#{nth($value, 1)}_hover_bd:hover {
+			border: nth($value, 2) !important;
+	   }
+
+
 }

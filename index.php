@@ -1,99 +1,117 @@
-<?php get_header(); ?>
+<?php
+get_header();
+
+$contenido = get_page_by_title( 'Portada' ) -> post_content;
+$contenido = apply_filters( 'the_content', $contenido );
+
+$logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
+
+
+?>
 
 <div id="portada" class="xrow h_75vh rel">
    <div id="portada_fondo" class="absUpL w_100 h_100 z-1">
       <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh hidden">
       </div>
    </div>
-   <div id="portada_cortina" class="cortina absUpL w_100 h_100 z0"></div>
+   <!-- <div id="portada_cortina" class="cortina absUpL w_100 h_100 z0"></div> -->
    <div class="w_100 text-center absUpL white h_100">
       <div class="small-12  medium-10 medium-centered large-8 large-centered h_100">
          <div class="medium-6 columns text-left titulo vcenter">
-            <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo_grande.png" alt="" />
+            <img src="<?php echo $logo; ?>" alt="" />
          </div>
-         <div class="medium-6 columns fontL text-left texto h_100">
+         <div class="contenido medium-6 columns fontL text-left texto h_100">
             <div class="vcenter">
-               <?php
-               echo apply_filters('the_content', get_page_by_title("Portada") -> post_content);
-               ?>
+               <?php echo $contenido; ?>
             </div>
          </div>
       </div>
    </div>
 </div>
 
-<div id="linea-de-tiempo-fondo" class="xrow h_15vh text-center p0 hidden">
+<div id="navegacion_videos" class="row xrow small-12 m0 p0 color_negro_bg">
 
-</div>
-<div id="linea-de-tiempo" class="xrow h_10vh text-center p0 ">
-   <?php
-      for ($i=0; $i < 7; $i++) :
-         $anno = $i < 5 ? (2011 + $i) : 'Más';
-   ?>
+   <div id="navegacion_archivo" class="columns xrow small-12 m0 p0" data-sticky-container>
+      <div class="sticky columns p0 h_10vh" data-sticky data-anchor="navegacion_videos" data-margin-top="4">
 
-      <div class="selector-tiempo cursor-pointer shareW vcenter fl" data-anno="<?php echo $anno; ?>">
 
-         <span class="texto-tiempo fontM uppercase row m0">
-            <?php echo $anno;  ?>
-         </span>
-
-         <div class="punto-tiempo-contenedor cursor-pointer row">
-            <?php echo $i < 5 ? '<span class="punto-tiempo small-centered fa fa-circle"></span>' : '<span class="fa fa-angle-right fontXL"></span>'; ?>
+         <div id="barra-categorias" class="columns h_10vh text-center abs z1k1 p0 color_blanco color_gris_oscuro_bg z1k1">
+            <?php
+            $ID = get_term_by('name','Archivo','category')->term_id;
+            $categorias = get_categories( array('parent'=>$ID,'hide_empty'=>0) );
+            foreach( $categorias as $categoria ) :
+               ?>
+               <li class="shareW fontM h_10vh p0">
+                  <div class="vcenter p0">
+                     <?php echo $categoria->name ?>
+                  </div>
+               </li>
+               <?php
+            endforeach;
+            ?>
          </div>
 
+         <div id="barra-annos" class="columns medium-2 large-1 end hide-for-small-only pt2 color_blanco color_negro_bg">
+            <ul class="h_80vh">
+               <?php for ($i=0; $i < 7; $i++) : ?>
+                  <li class="shareH">
+                     <?php echo $i<6 ? 2011+$i : "Más"; ?>
+                  </li>
+               <?php endfor; ?>
+            </ul>
+         </div>
       </div>
+   </div><!-- #navegacion_archivo -->
 
-   <?php endfor; ?>
-</div>
+   <div id="videos" class="columns medium-10 large-11 p0 z1">
 
-<div id="videos" class="xrow">
+      <?php
 
-   <?php
+      $args = array( 'post_type'=>'video', 'posts_per_page'=>22 );
 
-   $args = array( 'post_type'=>'video', 'posts_per_page'=>-1 );
-
-   $q = new WP_Query($args);
-   $i=0;
-   if($q->have_posts()):
-      while($q->have_posts()):
-         $q->the_post();
-         $i++;
-         ?>
+      $q = new WP_Query($args);
+      $i=0;
+      if($q->have_posts()):
+         while($q->have_posts()):
+            $q->the_post();
+            $i++;
+            ?>
 
 
-      <?php $anno = date('Y',strtotime($post->post_date)); ?>
+         <?php $anno = date('Y',strtotime($post->post_date)); ?>
 
-      <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>">
-         <a href="<?php echo get_the_permalink(); ?>">
-            <div class="imagen imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
-               <?php echo get_the_post_thumbnail(get_the_ID(),'thumb'); ?>
-            </div>
-            <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
-            <div class="info row h_100 text-center op0">
-               <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
-               <div class="info_texto w_100 h_100 absDownL z-1 white">
-                  <div class="vcenter">
-                     <h6 class="m0 fontL ">
-                        <?php echo get_the_title(); ?>
-                     </h6>
-                     <span class="m0 p1 row fontXS">
-                        <b>Categoría 1, Categoría 2</b>
-                     </span>
-                     <span class="m0 row" class="fontS">
-                        <?php echo get_the_date(); ?>
-                     </span>
+         <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>">
+            <a href="<?php echo get_the_permalink(); ?>">
+               <div class="imagen imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
+                  <?php echo get_the_post_thumbnail(get_the_ID(),'thumb'); ?>
+               </div>
+               <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
+               <div class="info row h_100 text-center op0">
+                  <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
+                  <div class="info_texto w_100 h_100 absDownL z-1 white">
+                     <div class="vcenter">
+                        <h6 class="m0 fontL ">
+                           <?php echo get_the_title(); ?>
+                        </h6>
+                        <span class="m0 p1 row fontXS">
+                           <b>Categoría 1, Categoría 2</b>
+                        </span>
+                        <span class="m0 row" class="fontS">
+                           <?php echo get_the_date(); ?>
+                        </span>
+                     </div>
                   </div>
                </div>
-            </div>
-         </a>
-      </div>
+            </a>
+         </div>
 
-         <?php
-      endwhile;
-   endif;
-   ?>
+            <?php
+         endwhile;
+      endif;
+      ?>
+
+   </div>
+
 
 </div>
-
-
 <?php get_footer(); ?>

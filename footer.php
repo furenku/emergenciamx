@@ -1,5 +1,3 @@
-   </script>
-
    </div>
 
 
@@ -9,7 +7,6 @@
       </span>
    </footer>
 
-</div>
 
 </body>
 
