@@ -27,7 +27,7 @@
 </div>
 <div id="linea-de-tiempo" class="xrow h_10vh text-center p0 ">
    <?php
-      for ($i=0; $i < 6; $i++) :
+      for ($i=0; $i < 7; $i++) :
          $anno = $i < 5 ? (2011 + $i) : 'Más';
    ?>
 
