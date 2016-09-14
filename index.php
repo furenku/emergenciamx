@@ -54,8 +54,8 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          <div id="barra-annos" class="columns medium-2 large-1 end hide-for-small-only pt2 color_blanco color_negro_bg">
             <ul class="h_80vh">
                <?php for ($i=0; $i < 7; $i++) : ?>
-                  <li class="shareH">
-                     <?php echo $i<6 ? 2011+$i : "Más"; ?>
+                  <li class="shareH selector-anno" data-anno="<?php echo $i<6 ? 2011+$i : ''; ?>">
+                     <?php echo $i < 6 ? 2011 + $i : "Más"; ?>
                   </li>
                <?php endfor; ?>
             </ul>
@@ -67,7 +67,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
       <?php
 
-      $args = array( 'post_type'=>'video', 'posts_per_page'=>22 );
+      $args = array( 'post_type'=>'video', 'posts_per_page'=> 6 );
 
       $q = new WP_Query($args);
       $i=0;
@@ -75,12 +75,22 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          while($q->have_posts()):
             $q->the_post();
             $i++;
+
+            $anno = date('Y',strtotime($post->post_date));
+
+            $categorias = get_the_category( get_the_ID() );
+
+            $cat_ids = array();
+            $cat_names = array();
+            foreach( $categorias as $categoria ) {
+               array_push( $cat_ids, $categoria -> cat_ID );
+               array_push( $cat_names, $categoria -> name );
+            }
             ?>
 
 
-         <?php $anno = date('Y',strtotime($post->post_date)); ?>
 
-         <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>">
+         <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
             <a href="<?php echo get_the_permalink(); ?>">
                <div class="imagen imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
                   <?php echo get_the_post_thumbnail(get_the_ID(),'thumb'); ?>
@@ -94,7 +104,9 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                            <?php echo get_the_title(); ?>
                         </h6>
                         <span class="m0 p1 row fontXS">
-                           <b>Categoría 1, Categoría 2</b>
+                           <b>
+                              <?php echo implode(", ", $cat_names); ?>
+                           </b>
                         </span>
                         <span class="m0 row" class="fontS">
                            <?php echo get_the_date(); ?>

@@ -12,6 +12,7 @@ $(document).ready(function(){
 
    u.vcenter();
    u.shareW();
+   u.shareH();
 
 
    setTimeout(function(){
@@ -103,7 +104,7 @@ $(document).ready(function(){
 
    // MENU DE AÑOS
 
-   var botonesAnno = $('.selector-tiempo');
+   var botonesAnno = $('.selector-anno');
 
    botonesAnno.click(function(){
 

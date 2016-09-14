@@ -48,6 +48,14 @@
 
 
 
+ul {
+   margin: 0; padding: 0;
+}
+
+li{
+   list-style: none;
+}
+
 #portada {
    #portada_fondo    {
       // filter: brightness(80%) contrast( 140% ) blur(4px);

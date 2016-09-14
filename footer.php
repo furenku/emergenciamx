@@ -8,6 +8,12 @@
    </footer>
 
 
+   <!-- markup para cerrar offcanvas -->
+</div>
+</div>
+</div>
+   <!-- markup para cerrar offcanvas -->
+   
 </body>
 
 <?php wp_footer(); ?>
