@@ -63,7 +63,7 @@ $(document).ready(function(){
       var img = $(this).find('img');
       var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
       if( img.length > 0 )
-         img.detach().appendTo( diapositiva );
+      img.detach().appendTo( diapositiva );
       $(this).remove();
    })
 
@@ -114,6 +114,35 @@ $(document).ready(function(){
 
    })
 
+   var botonesCategorias = $('.selector-categoria');
+
+   botonesCategorias.click(function(){
+
+      var categorias = $(this).data('categorias');
+
+      $videos_container.isotope({
+
+         filter: function() {
+
+            var cat_ids = $(this).data('categorias');
+
+            var in_array = false;
+
+            for( i in cat_ids ) {
+               var cat = cat_ids[ i ];
+               if( $.inArray( cat, categorias ) > -1 ) {
+                  in_array = true;
+                  break;
+               }
+            }
+
+            return in_array;
+
+         }
+      });
+
+   })
+
    if( parseInt( $(window).width() ) < 768 ) {
 
       $('nav#menu').detach().insertAfter('#mostrar_menu');
@@ -123,7 +152,7 @@ $(document).ready(function(){
       $('nav#menu li').addClass('mt0');
       $('nav#menu li').each(function(){
          var newDiv = $('<div>').addClass('vcenter').html( $(this).html() );
-          $(this).html( newDiv );
+         $(this).html( newDiv );
       })
       u.vcenter('nav#menu li')
 
@@ -171,43 +200,43 @@ $(document).ready(function(){
 
 
 $.fn.isotopeImagesReveal = function( $items ) {
-  var iso = this.data('isotope');
-  var itemSelector = iso.options.itemSelector;
-  // hide by default
-  $items.hide();
-  // append to container
-  this.append( $items );
-  $items.imagesLoaded().progress( function( imgLoad, image ) {
-    // get item
-    // image is imagesLoaded class, not <img>, <img> is image.img
-    var $item = $( image.img ).parents( itemSelector );
-    // un-hide item
-    $item.show();
-    // isotope does its thing
-    iso.appended( $item );
-  });
+   var iso = this.data('isotope');
+   var itemSelector = iso.options.itemSelector;
+   // hide by default
+   $items.hide();
+   // append to container
+   this.append( $items );
+   $items.imagesLoaded().progress( function( imgLoad, image ) {
+      // get item
+      // image is imagesLoaded class, not <img>, <img> is image.img
+      var $item = $( image.img ).parents( itemSelector );
+      // un-hide item
+      $item.show();
+      // isotope does its thing
+      iso.appended( $item );
+   });
 
-  return this;
+   return this;
 };
 
 function randomInt( min, max ) {
-  return Math.floor( Math.random() * max + min );
+   return Math.floor( Math.random() * max + min );
 }
 
 function getItem() {
-  var width = randomInt( 150, 400 );
-  var height = randomInt( 150, 250 );
-  var item = '<div class="item">'+
-    '<img src="http://lorempixel.com/' +
-      width + '/' + height + '/nature" /></div>';
-  return item;
+   var width = randomInt( 150, 400 );
+   var height = randomInt( 150, 250 );
+   var item = '<div class="item">'+
+   '<img src="http://lorempixel.com/' +
+   width + '/' + height + '/nature" /></div>';
+   return item;
 }
 
 function getItems() {
-  var items = '';
-  for ( var i=0; i < 12; i++ ) {
-    items += getItem();
-  }
-  // return jQuery object
-  return $( items );
+   var items = '';
+   for ( var i=0; i < 12; i++ ) {
+      items += getItem();
+   }
+   // return jQuery object
+   return $( items );
 }

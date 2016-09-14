@@ -39,7 +39,7 @@
                   ?>
 
                   <a href="<?php echo get_the_permalink( get_the_ID() ); ?>">
-                     <li class="columns fontM p3">
+                     <li class="selector-categoria columns fontM p3 button" data-catid="<?php echo $categoria -> cat_ID; ?>">
                         <?php echo $categoria->name ?>
                      </li>
                   </a>
