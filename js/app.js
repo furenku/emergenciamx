@@ -118,7 +118,7 @@ $(document).ready(function(){
 
    botonesCategorias.click(function(){
 
-      var categorias = $(this).data('categorias');
+      var categoria = $(this).data('categoria');
 
       $videos_container.isotope({
 
@@ -128,15 +128,7 @@ $(document).ready(function(){
 
             var in_array = false;
 
-            for( i in cat_ids ) {
-               var cat = cat_ids[ i ];
-               if( $.inArray( cat, categorias ) > -1 ) {
-                  in_array = true;
-                  break;
-               }
-            }
-
-            return in_array;
+            return $.inArray( categoria, cat_ids ) > -1 ;
 
          }
       });

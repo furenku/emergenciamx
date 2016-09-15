@@ -41,7 +41,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
             $categorias = get_categories( array('parent'=>$ID,'hide_empty'=>0) );
             foreach( $categorias as $categoria ) :
                ?>
-               <li class="selector-categoria shareW fontM h_10vh p0 button" data-categorias="<?php echo $categoria -> cat_ID; ?>">
+               <li class="selector-categoria shareW fontM h_10vh p0 button" data-categoria="<?php echo $categoria -> cat_ID; ?>">
                   <div class="vcenter p0">
                      <?php echo $categoria->name ?>
                   </div>
