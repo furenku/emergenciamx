@@ -38,17 +38,37 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          <div id="barra-categorias" class="columns h_10vh text-center abs z1k1 p0 color_blanco color_gris_oscuro_bg z1k1">
             <?php
             $ID = get_term_by('name','Archivo','category')->term_id;
-            $categorias = get_categories( array('parent'=>$ID,'hide_empty'=>0) );
+            $categorias = get_categories( array( 'parent'=>$ID ) );
+
             foreach( $categorias as $categoria ) :
+
+               $sub_categorias = get_categories( array( 'parent'=>$categoria->cat_ID ) );
+
                ?>
                <li class="selector-categoria shareW fontM h_10vh p0 button" data-categoria="<?php echo $categoria -> cat_ID; ?>">
                   <div class="vcenter p0">
-                     <?php echo $categoria->name ?>
+                     <?php echo $categoria->name; ?>
                   </div>
+               <?php
+               if( count( $sub_categorias ) > 0 ) {
+                  ?>
+                  <ul class="hidden">
+                     <?php foreach( $sub_categorias as $sub_categoria ) : ?>
+                     <li class="selector-categoria shareW fontM h_10vh p0 button" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
+                        <?php echo $sub_categoria->name; ?>
+                     </li>
+                     <?php endforeach; ?>
+                  </ul>
+                  <?php
+               }
+               ?>
                </li>
                <?php
+
             endforeach;
+
             ?>
+
          </div>
 
          <div id="barra-annos" class="columns medium-2 large-1 end hide-for-small-only pt2 color_blanco color_negro_bg">
@@ -67,7 +87,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
       <?php
 
-      $args = array( 'post_type'=>'video', 'posts_per_page'=> 6 );
+      $args = array( 'post_type'=>'video', 'posts_per_page'=> -1 );
 
       $q = new WP_Query($args);
       $i=0;

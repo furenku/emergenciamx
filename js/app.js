@@ -77,7 +77,7 @@ $(document).ready(function(){
 
 
    $('.imgLiquid.imgLiquidFill').imgLiquid();
-   $('.imgLiquid.imgLiquidNoFill').imgLiquid({fill:false});
+   $('.imgLiquid.imgLiquidNoFill').imgLiquid({ fill: false });
 
 
    $('#portada_fondo').slick({
@@ -118,7 +118,17 @@ $(document).ready(function(){
 
    botonesCategorias.click(function(){
 
+      var categorias = [];
+
       var categoria = $(this).data('categoria');
+      categorias.push( categoria );
+
+      var sub_categorias = $(this).find('li.selector-categoria')
+      sub_categorias.each(function(i,e){
+         console.log( $(e) ) ;//sub_categorias.eq(i) );
+         categorias.push( $(e).data('categoria') );
+      })
+      console.log( categorias )
 
       $videos_container.isotope({
 
@@ -128,7 +138,13 @@ $(document).ready(function(){
 
             var in_array = false;
 
-            return $.inArray( categoria, cat_ids ) > -1 ;
+            for(i in categorias) {
+               if( $.inArray( categorias[i], cat_ids ) > -1 ) {
+                  in_array = true;
+                  break;
+               }
+            }
+            return in_array;
 
          }
       });
