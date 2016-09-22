@@ -16,7 +16,8 @@
     "isotope": "^2.2.2",
     "font-awesome": "fontawesome#^4.5.0",
     "slick-carousel": "slick.js#^1.5.9",
-    "imagesloaded": "^4.1.0"
+    "imagesloaded": "^4.1.0",
+    "bLazy": "blazy#^1.6.2"
   },
   "ignore": [
     "**/.*",

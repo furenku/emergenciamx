@@ -9,7 +9,11 @@
 </head>
 <body class="color_negro_bg">
 
-
+   <div id="loading" class="w_100vw h_100vh absUpL black_bg z1k1">
+      <div class="white text-center h_a" style="height:20vh; margin-top:40vh; padding:0;">
+         <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo.png" alt="" />
+      </div>
+   </div>
 
    <!-- markup para iniciar offcanvas -->
    <div class="off-canvas-wrapper">

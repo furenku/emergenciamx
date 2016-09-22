@@ -45,7 +45,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                $sub_categorias = get_categories( array( 'parent'=>$categoria->cat_ID ) );
 
                ?>
-               <li class="selector-categoria shareW fontM h_10vh p0 button" data-categoria="<?php echo $categoria -> cat_ID; ?>">
+               <li class="selector-categoria shareW fontM h_10vh p0 button secondary" data-categoria="<?php echo $categoria -> cat_ID; ?>">
                   <div class="vcenter p0">
                      <?php echo $categoria->name; ?>
                   </div>
@@ -54,7 +54,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                   ?>
                   <ul class="hidden">
                      <?php foreach( $sub_categorias as $sub_categoria ) : ?>
-                     <li class="selector-categoria shareW fontM h_10vh p0 button" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
+                     <li class="selector-categoria shareW fontM h_10vh p0 button secondary" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
                         <?php echo $sub_categoria->name; ?>
                      </li>
                      <?php endforeach; ?>
@@ -112,8 +112,8 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
          <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
             <a href="<?php echo get_the_permalink(); ?>">
-               <div class="imagen imgLiquid imgLiquidFill w_100 h_100 absUpL z-1">
-                  <?php echo get_the_post_thumbnail(get_the_ID(),'thumb'); ?>
+               <div class="imagen w_100 h_100 absUpL z-1 op0">
+                  <?php echo get_lazyload_thumbnail(get_the_ID(),'medium'); ?>
                </div>
                <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
                <div class="info row h_100 text-center op0">

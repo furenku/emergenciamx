@@ -543,7 +543,7 @@
   position: fixed; }
 
 .hidden {
-  display: none; }
+  display: none !important; }
 
 .fontXS {
   font-size: 10px; }
@@ -4606,6 +4606,10 @@ table.hover tr:nth-of-type(even):hover {
 .long-delay {
   -webkit-animation-delay: 700ms !important;
           animation-delay: 700ms !important; }
+
+html, body {
+  height: 100vh;
+  overflow-y: hidden; }
 
 ul {
   margin: 0;

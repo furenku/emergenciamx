@@ -4,24 +4,22 @@ var u = new FrontEndUtils();
 
 
 var scrollTimeout = false;
+var resizeTimeout = false;
 
 $(document).ready(function(){
+
+   $('#loading img').fadeOut(400,function(){
+      $('#loading').fadeOut(400,function(){
+         $('#loading').remove();
+      })
+   });
+
+
 
    $(document).foundation();
 
 
-   u.vcenter();
-   u.shareW();
-   u.shareH();
 
-
-   setTimeout(function(){
-
-      u.vcenter();
-      u.shareW();
-      u.shareH();
-
-   }, 1000 );
 
    $(window).scroll(function(){
       if( ! scrollTimeout ) {
@@ -116,40 +114,74 @@ $(document).ready(function(){
 
    var botonesCategorias = $('.selector-categoria');
 
-   botonesCategorias.click(function(){
+   setup_botones_categorias( botonesCategorias );
 
-      var categorias = [];
+   function setup_botones_categorias( botones ) {
 
-      var categoria = $(this).data('categoria');
-      categorias.push( categoria );
 
-      var sub_categorias = $(this).find('li.selector-categoria')
-      sub_categorias.each(function(i,e){
-         console.log( $(e) ) ;//sub_categorias.eq(i) );
-         categorias.push( $(e).data('categoria') );
-      })
-      console.log( categorias )
+      botones.click(function(){
 
-      $videos_container.isotope({
+         var categorias = [];
 
-         filter: function() {
+         var categoria = $(this).data('categoria');
 
-            var cat_ids = $(this).data('categorias');
+         categorias.push( categoria );
 
-            var in_array = false;
+         var sub_categorias = $(this).find('li.selector-categoria')
+         sub_categorias.each(function(i,e){
+            categorias.push( $(e).data('categoria') );
+         })
 
-            for(i in categorias) {
-               if( $.inArray( categorias[i], cat_ids ) > -1 ) {
-                  in_array = true;
-                  break;
-               }
-            }
-            return in_array;
+         if( sub_categorias.length > 1 ) {
 
+            $('#barra-categorias > .selector-categoria').addClass('hidden');
+
+            var tmp = sub_categorias.clone().detach()
+            .prependTo('#barra-categorias')
+            .addClass('tmp')
+            .css('opacity',0).removeClass('hidden');
+
+            regresar = $('<li>').addClass('button shareW fontM h_10vh p0 button secondary')
+            regresar.html('<div class="vcenter"><span class="fa fa-angle-left"></span>Regresar</div>')
+            regresar.prependTo('#barra-categorias')
+
+            u.shareW('#barra-categorias .tmp');
+            u.vcenter('#barra-categorias .vcenter');
+
+            setup_botones_categorias( tmp );
+
+            tmp.css('opacity',1);
+
+            regresar.click(function(){
+               $('#barra-categorias .tmp').remove();
+               regresar.remove();
+               $('#barra-categorias  > li').removeClass('hidden');
+               u.vcenter('#barra-categorias .vcenter');
+            })
          }
-      });
 
-   })
+
+         $videos_container.isotope({
+            filter: function() {
+               var cat_ids = $(this).data('categorias');
+               var in_array = false;
+               for(i in categorias) {
+                  if( $.inArray( categorias[i], cat_ids ) > -1 ) {
+                     in_array = true;
+                     break;
+                  }
+               }
+               return in_array;
+            }
+         });
+
+         $('html,body').animate({
+            scrollTop: $('#portada').height() - $('#barra-categorias').height()
+         }, 400 );
+
+
+      })
+   }
 
    if( parseInt( $(window).width() ) < 768 ) {
 
@@ -199,6 +231,38 @@ $(document).ready(function(){
    //    }
    //
    // })
+
+   $(window).resize(function(){
+      if( ! resizeTimeout ) {
+         resizeTimeout = setTimeout(function(){
+
+            u.shareW();
+            u.shareH();
+            u.vcenter();
+
+            resizeTimeout = false;
+
+         },150);
+      }
+   })
+
+   $(window).trigger('resize');
+
+   $('html,body').css({height:'auto',overflowY:'auto'});
+
+   $('html,body').scrollTop(0);
+
+
+   var bLazy = new Blazy({
+      success: function(img) {
+         jimg = $(img);
+         if(jimg.parent().hasClass('imagen') ){
+            jimg.parent().addClass('imgLiquid imgLiquidFill')
+            jimg.parent().removeClass('op0')
+            jimg.parent().imgLiquid();
+         }
+      }
+   });
 
 
 })

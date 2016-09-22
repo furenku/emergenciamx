@@ -31,6 +31,7 @@ function emmx_enqueue_assets() {
    wp_enqueue_script( 'foundation', $theme . "bower_components/foundation-sites/dist/foundation.js" );
    wp_enqueue_script( 'imagesLoaded', $theme . "bower_components/imagesloaded/imagesloaded.pkgd.min.js" );
    wp_enqueue_script( 'isotope', $theme . "bower_components/isotope/dist/isotope.pkgd.min.js" );
+   wp_enqueue_script( 'blazy', $theme . "bower_components/bLazy/blazy.min.js" );
    wp_enqueue_script( 'imgLiquid', $theme . "bower_components/imgLiquid/js/imgLiquid-min.js" );
    wp_enqueue_script( 'slick', $theme . "bower_components/slick-carousel/slick/slick.min.js" );
    wp_enqueue_script( 'frontendutils', $theme . "js/frontendutils.js" );
@@ -133,3 +134,27 @@ class emmx_menu_walker extends Walker_Nav_Menu {
    $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 }
 }
+
+
+
+// Rewrite of "get_the_post_thumbnail" for compatibility with jQuery LazyLoad plugin
+function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
+   if ( $post_id ) {
+      // Get the id of the attachment
+      $attachment_id = get_post_thumbnail_id( $post_id );
+      if ( $attachment_id ) {
+         $src = wp_get_attachment_image_src( $attachment_id, $size );
+         if ($src) {
+            $img = get_the_post_thumbnail( $post_id, $size, array(
+               'class' => 'b-lazy',
+               'data-src' => $src[0],
+               'src' => 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+               'alt'=>get_the_title()
+
+               ) );
+               return $img; // returns image tag string or '' (empty string)
+            }
+         }
+      }
+      return false; // missing either: post_id, attachment_id, or src
+   }

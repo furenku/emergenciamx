@@ -45,7 +45,10 @@
 @include motion-ui-animations;
 
 
-
+html,body{
+   height: 100vh;
+   overflow-y: hidden;
+}
 
 
 ul {
