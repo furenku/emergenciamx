@@ -249,3 +249,10 @@ h1,h2,h3,h4,h5,h6 {
 .pattern {
    @extend %pattern;
 }
+
+
+
+
+.min_80vh {
+   min-height: 80vh;
+}

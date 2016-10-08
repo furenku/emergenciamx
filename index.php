@@ -55,7 +55,9 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                   <ul class="hidden">
                      <?php foreach( $sub_categorias as $sub_categoria ) : ?>
                      <li class="selector-categoria shareW fontM h_10vh p0 button secondary" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
-                        <?php echo $sub_categoria->name; ?>
+                        <div class="vcenter p0">
+                           <?php echo $sub_categoria->name; ?>
+                        </div>
                      </li>
                      <?php endforeach; ?>
                   </ul>
@@ -83,64 +85,9 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
       </div>
    </div><!-- #navegacion_archivo -->
 
-   <div id="videos" class="columns medium-10 large-11 p0 z1">
+   <div id="videos" class="columns medium-10 min_80vh large-11 p0 z1">
 
-      <?php
-
-      $args = array( 'post_type'=>'video', 'posts_per_page'=> -1 );
-
-      $q = new WP_Query($args);
-      $i=0;
-      if($q->have_posts()):
-         while($q->have_posts()):
-            $q->the_post();
-            $i++;
-
-            $anno = date('Y',strtotime($post->post_date));
-
-            $categorias = get_the_category( get_the_ID() );
-
-            $cat_ids = array();
-            $cat_names = array();
-            foreach( $categorias as $categoria ) {
-               array_push( $cat_ids, $categoria -> cat_ID );
-               array_push( $cat_names, $categoria -> name );
-            }
-            ?>
-
-
-
-         <div class="video rel medium-<?php echo ((i%5)+2)*2; ?> h_<?php echo (($i%3)+3)*10; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
-            <a href="<?php echo get_the_permalink(); ?>">
-               <div class="imagen w_100 h_100 absUpL z-1 op0">
-                  <?php echo get_lazyload_thumbnail(get_the_ID(),'medium'); ?>
-               </div>
-               <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
-               <div class="info row h_100 text-center op0">
-                  <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
-                  <div class="info_texto w_100 h_100 absDownL z-1 white">
-                     <div class="vcenter">
-                        <h6 class="m0 fontL ">
-                           <?php echo get_the_title(); ?>
-                        </h6>
-                        <span class="m0 p1 row fontXS">
-                           <b>
-                              <?php echo implode(", ", $cat_names); ?>
-                           </b>
-                        </span>
-                        <span class="m0 row" class="fontS">
-                           <?php echo get_the_date(); ?>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-            </a>
-         </div>
-
-            <?php
-         endwhile;
-      endif;
-      ?>
+      
 
    </div>
 

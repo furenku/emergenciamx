@@ -1,5 +1,8 @@
 <?php
 
+global $posts_per_page;
+$posts_per_page = 2;
+
 // cpts:
 
 include_once 'backend/cpt.php';
@@ -35,9 +38,16 @@ function emmx_enqueue_assets() {
    wp_enqueue_script( 'imgLiquid', $theme . "bower_components/imgLiquid/js/imgLiquid-min.js" );
    wp_enqueue_script( 'slick', $theme . "bower_components/slick-carousel/slick/slick.min.js" );
    wp_enqueue_script( 'frontendutils', $theme . "js/frontendutils.js" );
+
    wp_enqueue_script( 'app', $theme . "js/app.js" );
 
-   wp_enqueue_style( 'emmx', $theme . 'css/app.css' );
+   wp_localize_script( 'app', 'emmx_ajax',
+      array(
+         'ajaxurl' => admin_url( 'admin-ajax.php' ),
+         'get_videos_nonce' => wp_create_nonce( 'get_videos_nonce' )
+      )
+   );
+
 
 }
 
@@ -96,7 +106,7 @@ class emmx_menu_walker extends Walker_Nav_Menu {
 
       // build html
 
-      $cssClasseList = array(
+      $cssClassesList = array(
          'uppercase',
          'fwb',
          'vcenter',
@@ -109,7 +119,7 @@ class emmx_menu_walker extends Walker_Nav_Menu {
          'end'
       );
 
-      $cssClasses = esc_attr( implode(' ', $cssClasseList ) ) ;
+      $cssClasses = esc_attr( implode(' ', $cssClassesList ) ) ;
       $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . ' ' . $cssClasses . '">';
 
 
@@ -158,3 +168,100 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
       }
       return false; // missing either: post_id, attachment_id, or src
    }
+
+
+
+
+
+add_action( 'wp_ajax_dynamic_load_videos', 'dynamic_load_videos' );
+add_action( 'wp_ajax_nopriv_dynamic_load_videos', 'dynamic_load_videos' );
+
+function dynamic_load_videos() {
+
+   global $posts_per_page;
+
+   $pageToLoad = $_GET['pageToLoad'];
+   $nonce = $_GET['nonce'];
+   $stop = false;
+
+   if ( ! wp_verify_nonce( $nonce, 'get_videos_nonce' ) )
+    die ( 'Acceso denegado');
+
+   $html = NULL;
+
+
+   $args = array( 'post_type'=>'video', 'posts_per_page'=> $posts_per_page, 'offset' => ( $pageToLoad * $posts_per_page ) );
+
+   $q = new WP_Query($args);
+   $i=0;
+
+   $total = 0;
+   if($q->have_posts()):
+      $countposts = (int) wp_count_posts('video') -> publish;
+      $totalPages = floor($countposts / $posts_per_page);
+      $total = ( $pageToLoad * 100 ) / $totalPages;
+      ob_start();
+      while($q->have_posts()):
+         $q->the_post();
+         $i++;
+
+         $anno = date('Y',strtotime($post->post_date));
+
+         $categorias = get_the_category( get_the_ID() );
+
+         $cat_ids = array();
+         $cat_names = array();
+
+         foreach( $categorias as $categoria ) {
+            array_push( $cat_ids, $categoria -> cat_ID );
+            array_push( $cat_names, $categoria -> name );
+         }
+
+         ?>
+
+
+
+      <div class="video rel medium-<?php echo (($i%5)+2)*2; ?> large-<?php echo (($i%2)+2); ?> h_<?php echo ( rand(1,5)+3)*5; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
+         <a href="<?php echo get_the_permalink(); ?>">
+            <div class="imagen w_100 h_100 absUpL z-1 op0">
+               <?php echo get_lazyload_thumbnail(get_the_ID(),'medium'); ?>
+               <?php #echo get_the_post_thumbnail(get_the_ID(),'medium'); ?>
+            </div>
+            <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
+            <div class="info row h_100 text-center op0">
+               <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
+               <div class="info_texto w_100 h_100 absDownL z-1 white">
+                  <div class="vcenter">
+                     <h6 class="m0 fontL ">
+                        <?php echo get_the_title(); ?>
+                     </h6>
+                     <span class="m0 p1 row fontXS">
+                        <b>
+                           <?php echo implode(", ", $cat_names); ?>
+                        </b>
+                     </span>
+                     <span class="m0 row" class="fontS">
+                        <?php echo get_the_date(); ?>
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </a>
+      </div>
+
+         <?php
+
+      endwhile;
+
+      $html = ob_get_contents();
+
+      ob_end_clean();
+
+   else:
+      $stop = true;
+      $total = 100;
+   endif;
+
+   die( json_encode( array( 'html' => $html, 'stop' => $stop , 'total' => $total )) );
+
+}

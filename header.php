@@ -7,7 +7,15 @@
    <title>Emergencia MX</title>
    <?php wp_head(); ?>
 </head>
-<body class="color_negro_bg">
+<body class="color_negro_bg rel">
+   <div id="cargando-contenedor" class="w_100vw h_10vh absDownL fixed z1k1">
+      <div class="absDownL p1 fontS bold white fixed fwb">
+         Cargando: <span class="cargando">0%</span>%
+      </div>
+      <div id="cargando-barra" class="absDownL white_bg fixed" style="height:3px">
+      </div>
+   </div>
+
 
    <div id="loading" class="w_100vw h_100vh absUpL black_bg z1k1">
       <div class="white text-center h_a" style="height:20vh; margin-top:40vh; padding:0;">
@@ -43,7 +51,7 @@
                   ?>
 
                   <a href="<?php echo get_the_permalink( get_the_ID() ); ?>">
-                     <li class="selector-categoria columns fontM p3 button " data-categoria="<?php echo $categoria -> cat_ID; ?>">
+                     <li class="selector-categoria columns fontM p3 button shareW" data-categoria="<?php echo $categoria -> cat_ID; ?>">
                         <?php echo $categoria->name ?>
                      </li>
                   </a>
@@ -86,6 +94,7 @@
                   ) );
                ?>
                </nav>
+
 
                <!-- #mostrar_menu.small-3.medium-2.large-1.columns.text-center>span.fa.fa-bars.fontXL -->
                <div id="logotipo" class="small-8 medium-3 columns small-text-center medium-text-right h_100">

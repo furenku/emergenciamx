@@ -139,6 +139,10 @@ $screen-lg-min: 1200px;
 	@extend .h;
 	height: 30vh;
 }
+.h_35vh {
+	@extend .h;
+	height: 35vh;
+}
 .h_40vh {
 	@extend .h;
 	height: 40vh;
@@ -879,6 +883,9 @@ $screen-lg-min: 1200px;
 }
 
 .z1k1 {
+	z-index: 1001;
+}
+.z2k1 {
 	z-index: 1001;
 }
 
