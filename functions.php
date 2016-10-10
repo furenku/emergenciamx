@@ -1,7 +1,7 @@
 <?php
 
 global $posts_per_page;
-$posts_per_page = 2;
+$posts_per_page = 12;
 
 // cpts:
 
@@ -196,6 +196,8 @@ function dynamic_load_videos() {
    $i=0;
 
    $total = 0;
+   $columns_used = 0;
+
    if($q->have_posts()):
       $countposts = (int) wp_count_posts('video') -> publish;
       $totalPages = floor($countposts / $posts_per_page);
@@ -217,11 +219,21 @@ function dynamic_load_videos() {
             array_push( $cat_names, $categoria -> name );
          }
 
+         $columns_next = (rand(2,5)+1);
+
+         $columns_used += $columns_next;
+
+         if( $columns_used >= 7 ) {
+            $columns_next = ( 12 - $columns_used ) + 2;
+            $columns_used = 0;
+         }
+
          ?>
 
 
 
-      <div class="video rel medium-<?php echo (($i%5)+2)*2; ?> large-<?php echo (($i%2)+2); ?> h_<?php echo ( rand(1,5)+3)*5; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
+      <div class="video rel medium-<?php echo $columns_next; ?> large-<?php echo $columns_next; ?> h_<?php echo 40; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
+      <!-- <div class="video rel medium-<?php echo (($i%5)+2)*2; ?> large-<?php echo (($i%2)+2); ?> h_<?php echo ( rand(1,5)+3)*5; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>"> -->
          <a href="<?php echo get_the_permalink(); ?>">
             <div class="imagen w_100 h_100 absUpL z-1 op0">
                <?php echo get_lazyload_thumbnail(get_the_ID(),'medium'); ?>

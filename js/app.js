@@ -15,46 +15,44 @@ $(document).ready(function(){
    });
 
 
-
    $(document).foundation();
 
 
 
 
-   $(window).scroll(function(){
-      if( ! scrollTimeout ) {
 
-         scrollTimeout = setTimeout(function(){
-
-
-            if( $(window).scrollTop() > 50 ) {
-
-               if( $('#cabecera').hasClass('op0') || $('#cabecera').css('opacity') == 0 ) {
-                  $('#cabecera').animate({opacity:1},500,function() {
-                     $('#cabecera').removeClass('op0')
-                  })
-               }
-
-            } else {
-
-               if( ! $('#cabecera').hasClass('op0') ) {
-                  $('#cabecera').animate({opacity:0},500,function() {
-                     $('#cabecera').addClass('op0')
-                  })
-               }
-
-            }
-
-            scrollTimeout = false;
-
-         },150);
-
-      }
-
-
-
-
-   })
+   // $(window).scroll(function(){
+   //
+   //    if( ! scrollTimeout ) {
+   //
+   //       scrollTimeout = setTimeout(function(){
+   //
+   //
+   //          if( $(window).scrollTop() > 50 ) {
+   //
+   //             if( $('#cabecera').hasClass('op0') || $('#cabecera').css('opacity') == 0 ) {
+   //                $('#cabecera').animate({opacity:1},500,function() {
+   //                   $('#cabecera').removeClass('op0')
+   //                })
+   //             }
+   //
+   //          } else {
+   //
+   //             if( ! $('#cabecera').hasClass('op0') ) {
+   //                $('#cabecera').animate({opacity:0},500,function() {
+   //                   $('#cabecera').addClass('op0')
+   //                })
+   //             }
+   //
+   //          }
+   //
+   //          scrollTimeout = false;
+   //
+   //       },150);
+   //
+   //    }
+   //
+   // });
 
 
    $('#portada .contenido a').each(function(){
@@ -87,17 +85,8 @@ $(document).ready(function(){
       masonry: {
          gutterWidth:1
       }
-      // layoutMode: 'fitRows',
-   });//{columnWidth:100});
 
-   //
-   // var $items = getItems();
-   // $videos_container.isotopeImagesReveal( $items );
-
-
-
-   // fix temporal imgs portada
-
+   });
 
 
    // MENU DE AÑOS
@@ -153,18 +142,15 @@ $(document).ready(function(){
 
    $(window).trigger('resize');
 
-   $('html,body').css({height:'auto',overflowY:'auto'});
-
-   $('html,body').scrollTop(0);
+   // $('html,body').css({height:'auto',overflowY:'auto'});
+   //
+   // $('html,body').scrollTop(0);
 
 
    blazy();
 
 
    dynamic_load_videos();
-   // setInterval(function() {
-   //    dynamic_load_videos();
-   // }, 3000 );
 
 
 });
@@ -256,13 +242,16 @@ function dynamic_load_videos() {
          u.vcenter();
          // $('.imgLiquid.imgLiquidFill').imgLiquid();
          blazy();
+
          nextPageToLoad++;
 
-         console.log("TOTAL:" , response.total );
          $('.cargando').html( Math.round(response.total) );
-         $('#cargando-barra').width( $(window).width() * ( response.total * 0.01 ) );
+         $('#cargando-barra').animate({width: $(window).width() * ( response.total * 0.01 ) },300);
+
          if( response.stop == false ){
+
             dynamic_load_videos();
+
          } else {
             console.log("videos loading done");
             $('#cargando-contenedor').fadeOut(300,function() {
