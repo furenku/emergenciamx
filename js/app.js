@@ -6,6 +6,8 @@ var $videos_container;
 var scrollTimeout = false;
 var resizeTimeout = false;
 
+var categorias;
+
 $(document).ready(function(){
 
    $('#loading img').fadeOut(400,function(){
@@ -58,8 +60,6 @@ $(document).ready(function(){
       $('#portada .contenido a').each(function(){
          var img = $(this).find('img');
 
-console.log("img",img);
-
          if( img.length > 0 ) {
             var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
             img.detach().appendTo( diapositiva );
@@ -69,7 +69,6 @@ console.log("img",img);
 
       $('#portada .contenido img').each(function(){
 
-console.log("img",$(this));
          var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
 
          $(this).detach().appendTo( diapositiva );
@@ -86,12 +85,12 @@ console.log("img",$(this));
    })
 
 
-   $videos_container = $('#videos').isotope({
-      masonry: {
-         gutterWidth:1
-      }
-
-   });
+   // $videos_container = $('#videos').isotope({
+   //    masonry: {
+   //       gutterWidth:1
+   //    }
+   //
+   // });
 
 
    // MENU DE AÑOS
@@ -101,8 +100,8 @@ console.log("img",$(this));
    botonesAnno.click(function(){
 
       var anno = $(this).data('anno');
-
-      $videos_container.isotope({ filter: '[data-anno='+anno+']' });
+      $('#videos .video').css({display:'none'})
+      $('#videos').isotope({ filter: '[data-anno='+anno+']' });
 
    })
 
@@ -242,7 +241,11 @@ function dynamic_load_videos() {
 
          $('#videos').append( response.html );
 
-         masonry();
+         $('#videos').isotope({
+            masonry: {
+               gutterWidth:1
+            }
+         });
 
          u.vcenter();
          // $('.imgLiquid.imgLiquidFill').imgLiquid();
@@ -258,7 +261,9 @@ function dynamic_load_videos() {
             dynamic_load_videos();
 
          } else {
+
             console.log("videos loading done");
+
             $('#cargando-contenedor').fadeOut(300,function() {
                $('#cargando-contenedor').remove();
             });
@@ -280,10 +285,9 @@ function setup_botones_categorias( botones ) {
 
 
    botones.click(function(){
-
-      var categorias = [];
-
+      categorias = [];
       var categoria = $(this).data('categoria');
+
 
       categorias.push( categoria );
 
@@ -306,7 +310,6 @@ function setup_botones_categorias( botones ) {
          regresar.html('<div class="vcenter"><span class="fa fa-angle-left pr1"></span>Regresar</div>')
          regresar.prependTo('#barra-categorias')
 
-
          setup_botones_categorias( tmp );
 
          tmp.css('opacity',1);
@@ -326,7 +329,23 @@ function setup_botones_categorias( botones ) {
       }
 
       setTimeout(function(){
-         masonry();
+
+         $('#videos').isotope({
+            filter: function() {
+
+               var cat_ids = $(this).data('categorias');
+
+               var in_array = false;
+               for(i in categorias) {
+
+                  if( $.inArray( categorias[i], cat_ids ) > -1 ) {
+                     in_array = true;
+                     break;
+                  }
+               }
+               return in_array;
+            }
+         });
       },200);
 
       $('html,body').animate({
@@ -342,19 +361,8 @@ function setup_botones_categorias( botones ) {
 function masonry() {
 
 
-      $videos_container.isotope({
-         filter: function() {
-            var cat_ids = $(this).data('categorias');
-            var in_array = false;
-            for(i in categorias) {
-               if( $.inArray( categorias[i], cat_ids ) > -1 ) {
-                  in_array = true;
-                  break;
-               }
-            }
-            return in_array;
-         }
-      });
+
+
 
 
 }

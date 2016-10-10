@@ -8,8 +8,10 @@ get_header();
    <div class="sticky columns p0 h_75vh" data-sticky data-anchor="header-videos" data-margin-top="8">
       <ul class="h_100 mt3">
          <?php for ($i=0; $i < 7; $i++) : ?>
-            <li class="shareH selector-anno" data-anno="<?php echo $i<6 ? 2011+$i : ''; ?>">
-               <?php echo $i < 6 ? 2011 + $i : "Más"; ?>
+            <li class="shareH selector-anno button color_negro_bg" data-anno="<?php echo $i<6 ? 2011+$i : ''; ?>">
+               <div class="vcenter ha">
+                  <?php echo $i < 6 ? 2011 + $i : "Más"; ?>
+               </div>
             </li>
          <?php endfor; ?>
       </ul>
