@@ -260,6 +260,8 @@ function dynamic_load_videos() {
 
          }
 
+         $(window).trigger('resize');
+
       }
    });
 

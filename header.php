@@ -39,8 +39,8 @@
       </div>
    </div>
 
-   <div id="header-videos" class="columns ha">
-   <header id="cabecera" class="columns h_25vh z1k1" data-sticky-container>
+   <div id="header-videos" class="columns ha p0">
+   <header id="cabecera" class="columns h_25vh z1k1 p0" data-sticky-container>
       <div class="sticky columns p0 h_25vh" data-sticky data-anchor="header-videos" data-margin-top="0">
 
          <div class="columns p0 h_10vh">
@@ -131,10 +131,10 @@
 
 
                   <div id="cargando-contenedor" class="columns w_100vw h_5vh rel mt2 z1k1">
-                     <div class="columns mt2 p1 fontS bold white fwb">
+                     <div class="columns mt2 p1 fontS bold white fwb ha">
                         Cargando: <span class="cargando">0%</span>%
                      </div>
-                     <div id="cargando-barra" class="columns white_bg z1k1 mt4" style="height:3px">
+                     <div id="cargando-barra" class="columns white_bg z1k1 mt4 end" style="height:3px">
                      </div>
                   </div>
 
