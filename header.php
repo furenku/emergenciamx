@@ -17,7 +17,12 @@
       </div>
    </div> -->
 
+<?php
+$contenido = get_page_by_title( 'Portada' ) -> post_content;
+$contenido = apply_filters( 'the_content', $contenido );
 
+$logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
+         ?>
 
 
    <div id="portada" class="columns h_75vh rel">
@@ -25,7 +30,7 @@
          <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh hidden">
          </div>
       </div>
-      <div class="w_100 text-center absUpL white h_100">
+      <div class="w_100 text-center absUpL white h_100 z1">
          <div class="small-12  medium-10 medium-centered large-8 large-centered h_100">
             <div class="medium-6 columns text-left titulo vcenter">
                <img src="<?php echo $logo; ?>" alt="" />
@@ -39,11 +44,11 @@
       </div>
    </div>
 
-   <div id="header-videos" class="columns ha p0">
+   <div id="header-videos" class="columns ha p0 black_bg">
    <header id="cabecera" class="columns h_25vh z1k1 p0" data-sticky-container>
       <div class="sticky columns p0 h_25vh" data-sticky data-anchor="header-videos" data-margin-top="0">
 
-         <div class="columns p0 h_10vh">
+         <div class="columns p0 h_10vh black_bg">
             <!-- #busqueda.small-3.medium-2.large-1.columns.text-center>span.fa.fa-search.fontXL -->
             <div id="busqueda" class="small-3 medium-2 large-1 columns text-center h_100">
 
@@ -130,11 +135,13 @@
                   </div>
 
 
-                  <div id="cargando-contenedor" class="columns w_100vw h_5vh rel mt2 z1k1">
-                     <div class="columns mt2 p1 fontS bold white fwb ha">
-                        Cargando: <span class="cargando">0%</span>%
+                  <div id="cargando-contenedor" class="columns w_100vw h_5vh rel mt2 z1k1 p0">
+                     <div class="columns mt2 p1 fontS bold white fwb ha text-right m0">
+                        <span class="black_bg p2">
+                           Cargando: <span class="cargando">0%</span>%
+                        </span>
                      </div>
-                     <div id="cargando-barra" class="columns white_bg z1k1 mt4 end" style="height:3px">
+                     <div id="cargando-barra" class="columns white_bg z1k1 m0" style="height:3px">
                      </div>
                   </div>
 

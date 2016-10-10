@@ -55,21 +55,26 @@ $(document).ready(function(){
    // });
 
 
-   $('#portada .contenido a').each(function(){
-      var img = $(this).find('img');
-      var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
-      if( img.length > 0 )
-      img.detach().appendTo( diapositiva );
-      $(this).remove();
-   })
+      $('#portada .contenido a').each(function(){
+         var img = $(this).find('img');
 
-   $('#portada .contenido img').each(function(){
+console.log("img",img);
 
-      var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
+         if( img.length > 0 ) {
+            var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
+            img.detach().appendTo( diapositiva );
+         }
+         $(this).remove();
+      })
 
-      $(this).detach().appendTo( diapositiva );
+      $('#portada .contenido img').each(function(){
 
-   })
+console.log("img",$(this));
+         var diapositiva = $('#portada_fondo .diapositiva.hidden').clone().appendTo('#portada_fondo').removeClass('hidden');
+
+         $(this).detach().appendTo( diapositiva );
+
+      })
 
 
    $('.imgLiquid.imgLiquidFill').imgLiquid();
@@ -77,7 +82,7 @@ $(document).ready(function(){
 
 
    $('#portada_fondo').slick({
-      fade:true,autoplay:true,speed:2000, autoplaySpeed:4000
+      fade:false,autoplay:true,speed:400, autoplaySpeed:4000
    })
 
 
