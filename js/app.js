@@ -263,9 +263,17 @@ function dynamic_load_videos() {
 
                $('#videos').html( videosHTML );
 
-               $('#videos').isotope({
+               $videos_container = $('#videos').isotope({
                   layoutMode: 'packery',
                   filter: '*'
+               });
+               $videos_container.on( 'arrangeComplete', function( event, filteredItems ) {
+                  blazy();
+
+
+                  $('html,body').animate({
+                     scrollTop: $('#portada').height() - $('#barra-categorias').height() + Math.ceil( Math.random() * 3)
+                  }, 10);
                });
 
                u.vcenter();
@@ -326,17 +334,22 @@ function setup_botones_categorias( botones ) {
 
          tmp = tmp.add( categoria_superior)
 
-         console.log(categoria_superior);
-         regresar = $('<li>').addClass('shareW fontM h_10vh p0 button secondary tmp')
-         regresar.html('<div class="vcenter"><span class="fa fa-angle-left pr1"></span>Regresar</div>')
-         regresar.prependTo('#barra-categorias')
+         if( $("#barra-categorias .regresar").length == 0 ) {
+
+            regresar = $('<li>').addClass('shareW fontM h_10vh p0 button secondary tmp regresar')
+            regresar.html('<div class="vcenter"><span class="fa fa-angle-left pr1"></span>Regresar</div>')
+            regresar.prependTo('#barra-categorias')
+
+         }
 
          setup_botones_categorias( tmp );
 
          tmp.css('opacity',1);
 
          setTimeout(function(){
-            u.shareW('#barra-categorias .tmp');
+            // u.shareW('#barra-categorias .tmp');
+            $('#barra-categorias .tmp').width( ( $("#barra-categorias").innerWidth() - 12 ) / ( $('#barra-categorias .tmp').length ) );
+            $('#barra-categorias .tmp').css({ float: 'left', display: 'inline-block', boxSizing: 'border-box' });
             u.vcenter();//'#barra-categorias .vcenter');
          }, 100 );
 
@@ -346,8 +359,10 @@ function setup_botones_categorias( botones ) {
             $('#barra-categorias  > li').removeClass('hidden');
             u.vcenter('#barra-categorias .vcenter');
 
+            u.shareW('#barra-categorias > li');
             $('#videos').isotope({
-               filter: '*'
+               filter: '*',
+               layoutMode: 'packery',
             });
 
          })
@@ -361,7 +376,7 @@ function setup_botones_categorias( botones ) {
             onLayout: function() {
                $(window).trigger("scroll");
             },
-            layoutMode: 'fitRows',
+            layoutMode: 'packery',
             filter: function() {
 
                var cat_ids = $(this).data('categorias');
@@ -377,12 +392,7 @@ function setup_botones_categorias( botones ) {
                return in_array;
             }
          });
-         blazy();
 
-
-         $('html,body').animate({
-            scrollTop: $('#portada').height() - $('#barra-categorias').height() + Math.ceil( Math.random() * 5)
-         }, 10);
          // $('#videos .video').show();
       },500);
 
