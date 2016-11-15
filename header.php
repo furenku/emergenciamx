@@ -45,8 +45,8 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
    </div>
 
    <div id="header-videos" class="columns ha p0 black_bg">
-   <header id="cabecera" class="columns h_25vh z1k1 p0" data-sticky-container>
-      <div class="sticky columns p0 h_25vh" data-sticky data-anchor="header-videos" data-margin-top="0">
+   <header id="cabecera" class="columns h_20vh z1k1 p0" data-sticky-container>
+      <div class="sticky columns p0 h_20vh" data-sticky data-anchor="header-videos" data-margin-top="0">
 
          <div class="columns p0 h_10vh black_bg">
             <!-- #busqueda.small-3.medium-2.large-1.columns.text-center>span.fa.fa-search.fontXL -->
@@ -84,7 +84,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          </div>
 
 
-         <div class="columns p0 h_15vh">
+         <div class="columns p0 h_10vh">
 
 
             <div id="navegacion_videos" class="row xrow small-12 m0 p0 color_negro_bg">
