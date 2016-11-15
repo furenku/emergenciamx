@@ -34,6 +34,7 @@ function emmx_enqueue_assets() {
    wp_enqueue_script( 'foundation', $theme . "bower_components/foundation-sites/dist/foundation.js" );
    wp_enqueue_script( 'imagesLoaded', $theme . "bower_components/imagesloaded/imagesloaded.pkgd.min.js" );
    wp_enqueue_script( 'isotope', $theme . "bower_components/isotope/dist/isotope.pkgd.min.js" );
+   wp_enqueue_script( 'packery', "https://npmcdn.com/isotope-packery@2.0.0/packery-mode.pkgd.js" );
    wp_enqueue_script( 'blazy', $theme . "bower_components/bLazy/blazy.min.js" );
    wp_enqueue_script( 'imgLiquid', $theme . "bower_components/imgLiquid/js/imgLiquid-min.js" );
    wp_enqueue_script( 'slick', $theme . "bower_components/slick-carousel/slick/slick.min.js" );
@@ -42,9 +43,9 @@ function emmx_enqueue_assets() {
    wp_enqueue_script( 'app', $theme . "js/app.js" );
 
    wp_localize_script( 'app', 'emmx_ajax',
-      array(
-         'ajaxurl' => admin_url( 'admin-ajax.php' ),
-         'get_videos_nonce' => wp_create_nonce( 'get_videos_nonce' )
+   array(
+      'ajaxurl' => admin_url( 'admin-ajax.php' ),
+      'get_videos_nonce' => wp_create_nonce( 'get_videos_nonce' )
       )
    );
 
@@ -173,78 +174,84 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
 
 
 
-add_action( 'wp_ajax_dynamic_load_videos', 'dynamic_load_videos' );
-add_action( 'wp_ajax_nopriv_dynamic_load_videos', 'dynamic_load_videos' );
+   add_action( 'wp_ajax_dynamic_load_videos', 'dynamic_load_videos' );
+   add_action( 'wp_ajax_nopriv_dynamic_load_videos', 'dynamic_load_videos' );
 
-function dynamic_load_videos() {
+   function dynamic_load_videos() {
 
-   global $posts_per_page;
+      global $posts_per_page;
 
-   $pageToLoad = $_GET['pageToLoad'];
-   $nonce = $_GET['nonce'];
-   $stop = false;
+      $pageToLoad = $_GET['pageToLoad'];
+      $nonce = $_GET['nonce'];
+      $stop = false;
 
-   if ( ! wp_verify_nonce( $nonce, 'get_videos_nonce' ) )
-    die ( 'Acceso denegado');
+      if ( ! wp_verify_nonce( $nonce, 'get_videos_nonce' ) )
+      die ( 'Acceso denegado');
 
-   $html = NULL;
-
-
-   $args = array( 'post_type'=>'video', 'posts_per_page'=> $posts_per_page, 'offset' => ( $pageToLoad * $posts_per_page ) );
-
-   $q = new WP_Query($args);
-   $i=0;
-
-   $total = 0;
-   $columns_used = 0;
-
-   if($q->have_posts() ):
-   // if($q->have_posts() && $pageToLoad<3):
-      $countposts = (int) wp_count_posts('video') -> publish;
-      $totalPages = floor($countposts / $posts_per_page);
-      $total = ( $pageToLoad * 100 ) / $totalPages;
-      ob_start();
-      while($q->have_posts()):
-         $q->the_post();
-         $i++;
-
-         $anno = get_the_date('Y',get_the_ID());
-
-         $categorias = get_the_category( get_the_ID() );
-
-         $cat_ids = array();
-         $cat_names = array();
-
-         foreach( $categorias as $categoria ) {
-            array_push( $cat_ids, $categoria -> cat_ID );
-            array_push( $cat_names, $categoria -> name );
-         }
-
-         $columns_next = rand(2,4);
-
-         $columns_used += $columns_next;
-
-         if( $columns_used >= 10 ) {
-            $columns_next = 2;
-            $columns_used = 0;
-         }
-
-         ?>
+      $html = "";
 
 
+      $args = array( 'post_type'=>'video', 'posts_per_page'=> $posts_per_page, 'offset' => ( $pageToLoad * $posts_per_page ) );
 
-      <div class="video rel medium-<?php echo $columns_next; ?> large-<?php echo $columns_next; ?> h_25vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>">
-      <!-- <div class="video rel medium-<?php echo (($i%5)+2)*2; ?> large-<?php echo (($i%2)+2); ?> h_<?php echo ( rand(1,5)+3)*5; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>"> -->
-         <a href="<?php echo get_the_permalink(); ?>">
-            <div class="imagen w_100 h_100 absUpL z-1 op0">
-               <?php echo get_lazyload_thumbnail(get_the_ID(),'medium'); ?>
-               <?php #echo get_the_post_thumbnail(get_the_ID(),'medium'); ?>
-            </div>
-            <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
-            <div class="info row h_100 text-center op0 p1">
-               <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
-               <div class="info_texto w_100 h_100 p2 absDownL z-1 white">
-                  <!-- <div class="vcenter"> -->
+      $q = new WP_Query($args);
+      $i=0;
+
+      $total = 0;
+      $columns_used = 0;
+
+      if($q->have_posts() ):
+      // if($q->have_posts() && $pageToLoad<3):
+         $countposts = (int) wp_count_posts('video') -> publish;
+         $totalPages = floor($countposts / $posts_per_page);
+         $total = ( $pageToLoad * 100 ) / $totalPages;
+         ob_start();
+         while($q->have_posts()):
+            $q->the_post();
+            $i++;
+
+            $anno = get_the_date('Y',get_the_ID());
+
+            $categorias = get_the_category( get_the_ID() );
+
+            $cat_ids = array();
+            $cat_names = array();
+
+            foreach( $categorias as $categoria ) {
+               array_push( $cat_ids, $categoria -> cat_ID );
+               array_push( $cat_names, $categoria -> name );
+            }
+
+            $columns_next = rand(2,4);
+            // $columns_next = 2;
+
+            $columns_used += $columns_next;
+
+            if( $columns_used >= 10 ) {
+               $columns_next = 2;
+               $columns_used = 0;
+            }
+
+            ?>
+
+
+
+            <div
+            class="video rel medium-<?php echo $columns_next; ?> large-<?php echo $columns_next; echo $columns_next > 2 && ! rand(0,4) ? ' h_50vh' : ' h_25vh'; ?>  columns"
+            data-anno="<?php echo $anno; ?>"
+            data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>"
+            >
+
+            <!-- <div class="video rel medium-<?php echo (($i%5)+2)*2; ?> large-<?php echo (($i%2)+2); ?> h_<?php echo ( rand(1,5)+3)*5; ?>vh columns" data-anno="<?php echo $anno; ?>" data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>"> -->
+            <a href="<?php echo get_the_permalink(); ?>">
+               <div class="imagen w_100 h_100 absUpL z-1 op0">
+                  <?php echo get_lazyload_thumbnail(get_the_ID(),'post-thumbnail'); ?>
+                  <?php #echo get_the_post_thumbnail(get_the_ID(),'medium'); ?>
+               </div>
+               <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
+               <div class="info row h_100 text-center op0 p1">
+                  <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
+                  <div class="info_texto w_100 h_100 p2 absDownL z-1 white">
+                     <!-- <div class="vcenter"> -->
                      <h6 class="m0 fontM ">
                         <?php echo get_the_title(); ?>
                      </h6>
@@ -256,11 +263,11 @@ function dynamic_load_videos() {
                      <span class="m0 row fontXS">
                         <?php echo get_the_date(); ?>
                      </span>
-                  <!-- </div> -->
+                     <!-- </div> -->
+                  </div>
                </div>
-            </div>
-         </a>
-      </div>
+            </a>
+         </div>
 
          <?php
 

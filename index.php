@@ -1,9 +1,5 @@
-<?php
-get_header();
+<?php get_header(); ?>
 
-
-
-?>
 <div id="barra-annos" class="columns medium-2 large-1 end h_75vh hide-for-small-only pt2 color_blanco color_negro_bg" data-sticky-container>
    <div class="sticky columns p0 h_75vh" data-sticky data-anchor="header-videos" data-margin-top="8">
       <ul class="h_100 mt3">
@@ -18,12 +14,13 @@ get_header();
    </div>
 </div>
 
-   <div id="videos" class="columns medium-10 ha large-11 p0 z0">
+<div id="videos" class="columns medium-10 h-a large-11 p0 z0">
 
-
-
-   </div>
 
 
 </div>
+
+
+</div>
+
 <?php get_footer(); ?>
