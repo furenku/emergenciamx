@@ -4719,3 +4719,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .secondary {
   background-color: #333; }
+
+.selector-categoria {
+  background-color: #333 !important; }
+
+.selector-anno.activo,
+.selector-categoria.activo {
+  background-color: #151515 !important; }
