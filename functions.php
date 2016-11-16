@@ -198,9 +198,11 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
 
       $total = 0;
       $columns_used = 0;
+      $medium_columns_used = 0;
+      $large_columns_used = 0;
 
       if($q->have_posts() ):
-      // if($q->have_posts() && $pageToLoad<3):
+      //if($q->have_posts() && $pageToLoad<1):
          $countposts = (int) wp_count_posts('video') -> publish;
          $totalPages = floor($countposts / $posts_per_page);
          $total = ( $pageToLoad * 100 ) / $totalPages;
@@ -222,13 +224,24 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
             }
 
             $columns_next = rand(2,4);
-            // $columns_next = 2;
-
             $columns_used += $columns_next;
-
             if( $columns_used >= 10 ) {
                $columns_next = 2;
                $columns_used = 0;
+            }
+
+            $medium_columns_next = rand(4,6);
+            $medium_columns_used += $medium_columns_next;
+            if( $medium_columns_used >= 9 ) {
+               $medium_columns_next = 3;
+               $medium_columns_used = 0;
+            }
+
+            $large_columns_next = rand(2,4);
+            $large_columns_used += $large_columns_next;
+            if( $large_columns_used >= 10 ) {
+               $large_columns_next = 2;
+               $large_columns_used = 0;
             }
 
             ?>
@@ -236,7 +249,7 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
 
 
             <div
-            class="video rel medium-<?php echo $columns_next; ?> large-<?php echo $columns_next; echo $columns_next > 2 && ! rand(0,4) ? ' h_50vh' : ' h_25vh'; ?>  columns"
+            class="video rel medium-<?php echo $medium_columns_next; ?> large-<?php echo $large_columns_next; echo $columns_next > 2 && ! rand(0,4) ? ' h_50vh' : ' h_40vh'; ?>  columns"
             data-anno="<?php echo $anno; ?>"
             data-categorias="<?php echo count($cat_ids)>0 ? json_encode($cat_ids) : ''; ?>"
             >
@@ -248,22 +261,22 @@ function get_lazyload_thumbnail( $post_id = false, $size = 'post-thumbnail' ) {
                   <?php #echo get_the_post_thumbnail(get_the_ID(),'medium'); ?>
                </div>
                <div class="cortina w_100 h_100 abs z-1 p0 m0"></div>
-               <div class="info row h_100 text-center op0 p1">
+               <div class="info columns h_100 text-center op0 rel">
                   <!-- <div class="cortina w_100 h_100 absUpL z0"></div> -->
-                  <div class="info_texto w_100 h_100 p2 absDownL z-1 white">
-                     <!-- <div class="vcenter"> -->
-                     <h6 class="m0 fontM ">
+                  <div class="info_texto columns h_100 pt0 pl1 pr1 absDownL z-1 white">
+                     <div class="columns vcenter h_a">
+                     <h6 class="m0 fontM p2">
                         <?php echo get_the_title(); ?>
                      </h6>
-                     <span class="m0 p1 row fontXS">
+                     <span class="m0 columns p2 fontXS">
                         <b>
                            <?php echo implode(", ", $cat_names); ?>
                         </b>
                      </span>
-                     <span class="m0 row fontXS">
+                     <span class="m0 columns p2 fontXS">
                         <?php echo get_the_date(); ?>
                      </span>
-                     <!-- </div> -->
+                     </div>
                   </div>
                </div>
             </a>

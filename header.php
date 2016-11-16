@@ -46,7 +46,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
    <div id="header-videos" class="columns ha p0 black_bg">
    <header id="cabecera" class="columns h_20vh z1k1 p0" data-sticky-container>
-      <div class="sticky columns p0 h_20vh" data-sticky data-anchor="header-videos" data-margin-top="0">
+      <div class="sticky columns p0 h_20vh" data-sticky data-anchor="header-videos" data-margin-top="0" data-sticky-on="small">
 
          <div class="columns p0 h_10vh black_bg">
             <!-- #busqueda.small-3.medium-2.large-1.columns.text-center>span.fa.fa-search.fontXL -->
