@@ -61,8 +61,8 @@ li{
 
 #portada {
    #portada_fondo    {
-      // filter: brightness(80%) contrast( 140% ) blur(4px);
-      // -webkit-filter: brightness(80%) contrast( 140% ) blur(4px);
+      filter: brightness(150%) contrast( 130% );
+      -webkit-filter: brightness(150%) contrast( 130% );
    }
    overflow: hidden;
    .titulo{
@@ -72,7 +72,8 @@ li{
       // font-weight: 700;
    }
    .titulo, .texto {
-      text-shadow: 1px 1px 0 #000;
+      color: black !important;
+      text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
    }
 }
 
@@ -207,6 +208,7 @@ h1,h2,h3,h4,h5,h6 {
 %pattern {
    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAD0lEQVQImWNgwATGtBAAADM2AQCsBUIOAAAAAElFTkSuQmCC) repeat;}
 
+.page,
 .post.single {
 
    background-color: #fafafa;
@@ -274,4 +276,15 @@ h1,h2,h3,h4,h5,h6 {
 .selector-anno.activo,
 .selector-categoria.activo {
    background-color: #151515 !important;
+}
+
+
+#videos_relacionados {
+   background-color: #ddd;
+}
+
+
+
+#footer {
+   background-color: #111;
 }

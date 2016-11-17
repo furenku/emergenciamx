@@ -18,24 +18,28 @@
    </div> -->
 
 <?php
+
+if( is_front_page() ) :
+
 $contenido = get_page_by_title( 'Portada' ) -> post_content;
 $contenido = apply_filters( 'the_content', $contenido );
 
 $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
+
          ?>
 
 
-   <div id="portada" class="columns h_75vh rel">
+   <div id="portada" class="columns h_60vh rel">
       <div id="portada_fondo" class="absUpL w_100 h_100 z1">
          <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh hidden">
          </div>
       </div>
       <div class="w_100 text-center absUpL white h_100 z1">
-         <div class="small-12  medium-10 medium-centered large-8 large-centered h_100">
+         <div class="texto small-12  medium-10 medium-centered large-8 large-centered h_100">
             <div class="medium-6 columns text-left titulo vcenter">
                <img src="<?php echo $logo; ?>" alt="" />
             </div>
-            <div class="contenido medium-6 columns fontL text-left texto h_100">
+            <div class="contenido medium-6 columns fontXL text-left h_100">
                <div class="vcenter">
                   <?php echo $contenido; ?>
                </div>
@@ -44,9 +48,12 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
       </div>
    </div>
 
+   <?php endif; // is_front_page ?>
+
+
    <div id="header-videos" class="columns ha p0 black_bg">
-   <header id="cabecera" class="columns h_20vh z1k1 p0" data-sticky-container>
-      <div class="sticky columns p0 h_20vh" data-sticky data-anchor="header-videos" data-margin-top="0" data-sticky-on="small">
+   <header id="cabecera" class="columns <?php echo is_front_page() ? "h_20vh" : "h_10vh"; ?> z1k1 p0" data-sticky-container>
+      <div class="sticky columns p0  <?php echo is_front_page() ? "h_20vh" : "h_10vh"; ?>" data-sticky data-anchor="header-videos" data-margin-top="0" data-sticky-on="small">
 
          <div class="columns p0 h_10vh black_bg">
             <!-- #busqueda.small-3.medium-2.large-1.columns.text-center>span.fa.fa-search.fontXL -->
@@ -83,6 +90,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
          </div>
 
+         <?php if( is_front_page() ) : ?>
 
          <div class="columns p0 h_10vh">
 
@@ -149,6 +157,8 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                </div><!-- #navegacion_archivo -->
 
             </div>
+
+            <?php endif; ?>
 
          </div>
 

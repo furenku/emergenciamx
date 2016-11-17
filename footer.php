@@ -3,11 +3,36 @@
    </div>
 </div><!-- #header-videos -->
 
-   <footer id="footer" class="row xrow h_5vh text-center white rel">
-
-      <span class="fontS vcenter">
-         Emergencia MX. Copyleft 2016
-      </span>
+   <footer id="footer" class="columns h_25vh white rel">
+      <div class="columns medium-6 h_100 p4">
+         <span class="columns fontS vcenter h_a">
+            EmergenciaMX 2016. Todos los Derechos Reservados.
+         </span>
+      </div>
+      <div class="columns medium-3 medium-offset-3 h_100">
+         <div class="columns fontL vcenter h_a">
+            <div class="columns small-3 text-right">
+               <a href="#">
+                  <span class="fa fa-facebook"></span>
+               </a>
+            </div>
+            <div class="columns small-3 text-right">
+               <a href="#">
+                  <span class="fa fa-twitter"></span>
+               </a>
+            </div>
+            <div class="columns small-3 text-right">
+               <a href="#">
+                  <span class="fa fa-instagram"></span>
+               </a>
+            </div>
+            <div class="columns small-3 text-right">
+               <a href="#">
+                  <span class="fa fa-envelope"></span>
+               </a>
+            </div>
+         </div>
+      </div>
 
    </footer>
 

@@ -420,6 +420,9 @@ function setupPortada() {
 
 
    $('#portada_fondo').slick({
-      fade:false,autoplay:true,speed:400, autoplaySpeed:4000
+      fade:false,
+      autoplay:true,
+      speed:400,
+      autoplaySpeed:4000
    })
 }
