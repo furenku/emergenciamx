@@ -34,16 +34,22 @@ if( have_posts() ) {
                $q->the_post();
                ?>
 
-               <div class="proyecto medium-4 columns p5 end">
-                  <div class="imagen columns small-8 small-offset-2 end imgLiquid imgLiquidNoFill h_20vh mb1">
-                     <?php echo get_the_post_thumbnail( get_the_ID(), "post-thumbnail" ); ?>
-                  </div>
-                  <div class="p3 mt1">
-                     <h4>
-                        <?php echo get_the_title(); ?>
-                     </h4>
-                  </div>
-               </div>
+               <article class="proyecto medium-4 columns p5 end">
+
+                  <a href="<?php echo get_the_permalink(); ?>">
+
+                     <div class="imagen columns small-8 small-offset-2 end imgLiquid imgLiquidNoFill h_20vh mb1">
+                        <?php echo get_the_post_thumbnail( get_the_ID(), "post-thumbnail" ); ?>
+                     </div>
+                     <div class="p3 mt1">
+                        <h4 class="black">
+                           <?php echo get_the_title(); ?>
+                        </h4>
+                     </div>
+
+                  </a>
+
+               </article>
                <?php
             endwhile;
          endif;
