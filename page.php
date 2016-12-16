@@ -11,7 +11,7 @@ if( have_posts() ) {
       ?>
 
 
-      <div id="page_<?php echo get_the_ID(); ?>" class="page single xrow rel ha pt4 pb2 m0">
+      <div id="page_<?php echo get_the_ID(); ?>" class="page single row rel ha pt4 pb2 m0">
 
          <div class="titulo xrow m2 p0 m0 text-center m0">
             <h1 class="p4">

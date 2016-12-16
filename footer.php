@@ -12,22 +12,18 @@
       <div class="columns medium-3 medium-offset-3 h_100">
          <div class="columns fontL vcenter h_a">
             <div class="columns small-3 text-right">
-               <a href="#">
+               <a href="https://es-la.facebook.com/emergenciamx.org/" target="_blank">
                   <span class="fa fa-facebook"></span>
                </a>
             </div>
             <div class="columns small-3 text-right">
-               <a href="#">
+               <a href="https://twitter.com/emergenciamx" target="_blank">
                   <span class="fa fa-twitter"></span>
                </a>
             </div>
+
             <div class="columns small-3 text-right">
-               <a href="#">
-                  <span class="fa fa-instagram"></span>
-               </a>
-            </div>
-            <div class="columns small-3 text-right">
-               <a href="#">
+               <a href="mailto:emergenciamx.docus@gmail.com">
                   <span class="fa fa-envelope"></span>
                </a>
             </div>

@@ -22,12 +22,14 @@ $(document).ready(function(){
 
 
 
+   setupBusqueda();
 
    setupPortada();
 
 
    $('.imgLiquid.imgLiquidFill').imgLiquid();
    $('.imgLiquid.imgLiquidNoFill').imgLiquid({ fill: false });
+   $('.imgLiquid.imgLiquidNoFillRight').imgLiquid({ fill: false, horizontalAlign: "right" });
 
 
 
@@ -52,7 +54,7 @@ $(document).ready(function(){
 
       $(this).addClass("activo")
 
-//      $('#videos .video').css({display:'none'})
+      //      $('#videos .video').css({display:'none'})
 
       $('#videos').isotope({
          //filter: '[data-anno='+anno+']'
@@ -396,6 +398,37 @@ function masonry() {
 }
 
 
+function setupBusqueda() {
+
+   $('#busqueda-boton').click(function(){
+
+      if( $('#cabecera-busqueda').hasClass('hidden') ) {
+
+         $('#cabecera-busqueda').removeClass('hidden')
+         $('#cabecera-contenedor').addClass('hidden')
+         u.vcenter( '#cabecera-busqueda .vcenter')
+
+      } else {
+
+         $('#cabecera-busqueda').addClass('hidden')
+         $('#cabecera-contenedor').removeClass('hidden')
+
+      }
+
+   })
+
+   $('#busqueda-cerrar').click(function(){
+
+      if( ! $('#cabecera-busqueda').hasClass('hidden') ) {
+
+         $('#cabecera-busqueda').addClass('hidden')
+         $('#cabecera-contenedor').removeClass('hidden')
+
+      }
+
+   })
+
+}
 
 function setupPortada() {
 

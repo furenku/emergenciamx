@@ -6,6 +6,8 @@ $posts_per_page = 12;
 // cpts:
 
 include_once 'backend/cpt.php';
+include_once 'backend/taxonomies.php';
+
 add_theme_support( 'post-thumbnails' );
 // recursos css y js:
 
