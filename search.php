@@ -1,64 +1,49 @@
 <?php
 
 get_header();
+?>
 
-if( have_posts() ) {
-   while ( have_posts() ) {
-      the_post();
+<div class="xrow white_bg min_80vh">
+   <div class="row p5 ">
+
+      <h1 class="mt4">Búsqueda: <?php echo get_search_query(); ?></h1>
+      <?php
+
+      if( have_posts() ) :
+         while ( have_posts() ) :
+            the_post();
+
+            ?>
 
 
+            <div id="post_<?php echo get_the_ID(); ?>" class="p5 columns columns large-10 end post single columns ha p0 m0">
 
-      $cats = get_the_category(get_the_ID());
-      $cat_ids = array();
-      $cat_str = "";
-      foreach($cats as $i => $c ) {
-         array_push( $cat_ids,  $c->term_id );
+               <div class="columns medium-5 large-4 imgLiquid imgLiquidFill h_25vh">
+                  <?php echo get_the_post_thumbnail(); ?>
+               </div>
 
-         $cat_str .= '<a href="' . get_category_link($c->term_id) . '" class="red">';
-            $cat_str .= $c->name != "Sin categoría" ? $c->name : '';
-         $cat_str .= '</a>';
+               <div class="columns medium-7 large-8 imgLiquid imgLiquidFill">
+                  <h4 class="">
+                     <?php echo search_title_highlight(); ?>
+                  </h4>
 
-         $cat_str .= $i < count( $cats ) - 1  ? ', ' : '';
-      }
+
+                  <div class="contenido text-left black p0">
+                     <?php echo search_excerpt_highlight();?>
+                  </div>
+               </div>
+            </div>
+
+            <hr>
+
+            <?php
+         endwhile;
+      endif;
       ?>
 
 
-      <div id="post_<?php echo get_the_ID(); ?>" class="pt4 rel post single xrow ha p0 m0">
-         <div class="video_holder z-1 ovyh p0">
-         </div>
-         <div class="titulo xrow m2 p0 m0 text-center m0">
-            <h2 class="p4">
-               <?php echo get_the_title(); ?>
-            </h2>
-         </div>
-
-
-         <div class="fecha row text-right fontM black p0 mt2 text-center">
-            Publicado el <?php echo get_the_date(); ?>
-         </div>
-
-
-
-         <div class="contenido medium-8 medium-centered fontL text-center black mb4 pt0">
-            <?php echo apply_filters('the_excerpt', get_the_excerpt() );?>
-         </div>
-      </div>
-      
-      <?php
-   }
-}
-
-?>
-
-
-<script>
-
-   $(document).ready(function(){
-      $('.contenido iframe').detach().appendTo('.video_holder')
-   })
-</script>
-
-
+   </div>
+</div>
 
 <?php
 get_footer();

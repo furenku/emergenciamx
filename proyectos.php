@@ -14,13 +14,13 @@ if( have_posts() ) :
       <div id="post_<?php echo get_the_ID(); ?>" class=" post single xrow rel ha pt4 pb2 m0">
 
          <div class="titulo xrow m2 p0 m0 text-center m0">
-            <h1 class="p4">
+            <h1 class="p4 pt3">
                <?php echo get_the_title(); ?>
             </h1>
          </div>
 
 
-         <div class="contenido medium-8 medium-centered fontL text-center black mb4 pt0">
+         <div class="contenido medium-8 medium-centered fontL text-center black mb4 pt3">
             <?php echo apply_filters('the_content', get_the_content() );?>
          </div>
 
@@ -37,6 +37,7 @@ endif;
 
 
 ?>
+<div class="xrow white_bg">
 <div id="otros_proyectos" class="row columns text-center p5 white_bg">
 
    <?php foreach( $tipos_proyecto as $tipo_proyecto ) : ?>
@@ -100,6 +101,7 @@ endif;
 
    <?php endforeach; ?>
 
+</div>
 </div>
 
 

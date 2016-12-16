@@ -326,3 +326,15 @@ h1,h2,h3,h4,h5,h6 {
 .patron {
    @extend %pattern;
 }
+
+
+
+.search-highlight {
+   background-color: #ba1620;
+   color: white;
+}
+
+
+hr {
+   border-bottom: 1px solid #ddd;
+}
