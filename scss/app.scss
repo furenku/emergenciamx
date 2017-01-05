@@ -99,9 +99,16 @@ li{
 body {
    // background-color: #000;
 }
+
+
+a {
+   color: #ba1620 !important;
+}
+
+
 #cabecera {
    a {
-      color: #fff;
+      color: #fff !important;
    }
    background-color: #000;
    color: #fff;

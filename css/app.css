@@ -4644,11 +4644,14 @@ li {
   font-weight: 700 !important; }
 
 /*COLORES*/
+a {
+  color: #ba1620 !important; }
+
 #cabecera {
   background-color: #000;
   color: #fff; }
   #cabecera a {
-    color: #fff; }
+    color: #fff !important; }
   #cabecera nav, #cabecera ul {
     height: 100%; }
   #cabecera nav li {

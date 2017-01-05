@@ -83,7 +83,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
             <!-- #mostrar_menu.small-3.medium-2.large-1.columns.text-center>span.fa.fa-bars.fontXL -->
             <div id="logotipo" class="small-8 medium-3 columns small-text-center medium-text-right h_100 p3">
                <a href="<?php echo site_url(); ?>" class="row h_100 imgLiquid imgLiquidNoFillRight">
-                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo-e-2x.png" alt="" />
+                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo-e.png" alt="" />
                </a>
             </div>
             <div id="mostrar_menu" class="show-for-small-only small-2 columns text-right h_100"><span class="fa fa-bars fontXL vcenter columns"></span></div>

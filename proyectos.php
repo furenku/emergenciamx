@@ -71,7 +71,6 @@ endif;
 
                   <article class="proyecto medium-4 columns p3 end">
 
-                     <a href="<?php echo get_the_permalink(); ?>">
 
                         <div class="imagen columns small-8 small-offset-2 end imgLiquid imgLiquidNoFill h_20vh mb1">
                            <?php echo get_the_post_thumbnail( get_the_ID(), "post-thumbnail" ); ?>
@@ -83,11 +82,9 @@ endif;
                         </div>
                         <div class="p3 mt1 extracto text-left">
                            <p class="black">
-                              <?php echo get_the_excerpt(); ?>
+                              <?php echo apply_filters('the_content',get_the_content()); ?>
                            </p>
                         </div>
-
-                     </a>
 
                   </article>
                   <?php
