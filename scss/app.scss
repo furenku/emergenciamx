@@ -345,3 +345,18 @@ h1,h2,h3,h4,h5,h6 {
 hr {
    border-bottom: 1px solid #ddd;
 }
+
+
+
+#portada {
+   .contenido .columns {
+      @media (max-width: 640px) {
+         border-top: 2px solid #ba1620;
+         padding-top: $spacing;
+      }
+      @media (min-width: 641px) {
+         border-left: 2px solid #ba1620;
+         padding-left: $spacing;
+      }
+   }
+}

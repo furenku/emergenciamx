@@ -29,18 +29,19 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          ?>
 
 
-   <div id="portada" class="columns h_60vh rel">
+   <div id="portada" class="columns h_60vh h_sm_90vh rel">
       <div id="portada_fondo" class="absUpL w_100 h_100 z1">
-         <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh hidden">
+         <div class="diapositiva imgLiquid imgLiquidFill xrow h_75vh h_sm_90vh hidden">
          </div>
       </div>
-      <div class="w_100 text-center absUpL white h_100 z1">
-         <div class="texto small-12  medium-10 medium-centered large-8 large-centered h_100">
-            <div class="medium-6 columns text-left titulo vcenter">
+      <div class="w_100 text-center absUpL white h_100  z1">
+         <!-- <div class="texto small-12 medium-10 medium-centered large-8 large-centered h_100"> -->
+         <div class="texto small-12 medium-10 medium-centered  h_100 h_sm_30vh">
+            <div class="medium-6 columns text-left titulo vcenter  p_sm_4">
                <img src="<?php echo $logo; ?>" alt="" />
             </div>
-            <div class="contenido medium-6 columns fontXL text-left h_100">
-               <div class="vcenter">
+            <div class="contenido medium-6 columns fontL p5 p_sm_2 text-left h_100 h_sm_50vh">
+               <div class="vcenter columns large-10 large-centered">
                   <?php echo $contenido; ?>
                </div>
             </div>
@@ -57,7 +58,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
 
          <div id="cabecera-contenedor" class="columns p0 h_10vh black_bg">
             <!-- #busqueda.small-3.medium-2.large-1.columns.text-center>span.fa.fa-search.fontXL -->
-            <div id="busqueda-boton" class="small-3 medium-2 large-1 columns text-center h_100">
+            <div id="busqueda-boton" class="small-1 medium-2 large-1 columns text-center h_100">
 
                <div class="vcenter">
                   <span class="fa fa-search fontXL" data-toggle="offCanvas"></span>
@@ -79,14 +80,15 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                ?>
             </nav>
 
+            <div id="mostrar_menu" class="show-for-small-only small-1 columns text-left h_100"><span class="fa fa-bars fontXL vcenter columns"></span></div>
 
             <!-- #mostrar_menu.small-3.medium-2.large-1.columns.text-center>span.fa.fa-bars.fontXL -->
-            <div id="logotipo" class="small-8 medium-3 columns small-text-center medium-text-right h_100 p3">
+            <div id="logotipo" class="small-10 medium-3 columns small-text-center medium-text-right h_100 p3">
                <a href="<?php echo site_url(); ?>" class="row h_100 imgLiquid imgLiquidNoFillRight">
                   <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/emergencialogo-e.png" alt="" />
                </a>
             </div>
-            <div id="mostrar_menu" class="show-for-small-only small-2 columns text-right h_100"><span class="fa fa-bars fontXL vcenter columns"></span></div>
+
 
 
          </div>

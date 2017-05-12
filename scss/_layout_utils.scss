@@ -444,7 +444,9 @@ $screen-lg-min: 1200px;
 	.h {
 		display: block;
 	}
-
+	.h_sm_a {
+		height: auto !important;
+	}
 	.h_sm_0 {
 		display: block;
 		min-height: 0;
@@ -539,6 +541,10 @@ $screen-lg-min: 1200px;
 	.h_sm_100vh {
 		display: block;
 		height: 100vh !important;
+	}
+	.h_sm_150vh {
+		display: block;
+		height: 150vh !important;
 	}
 
 
