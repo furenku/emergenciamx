@@ -111,7 +111,11 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                   <div>
 
 
-                     <div id="barra-categorias" class="columns h_10vh text-center abs z1k1 p0 color_blanco color_gris_oscuro_bg z1k1">
+                     <div id="desplegable-categorias" class="show-for-small-only columns h_10vh text-center abs z1k1 p0 color_blanco color_gris_oscuro_bg z1k1">
+                        <button>Categorías</button>
+                     </div>
+
+                     <div id="barra-categorias" class="columns h_10vh h_sm_90vh text-center abs z1k1 p0 color_blanco color_gris_oscuro_bg z1k1">
                         <?php
                         $ID = get_term_by('name','Archivo','category')->term_id;
                         $categorias = get_categories( array( 'parent'=>$ID ) );
@@ -121,7 +125,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                            $sub_categorias = get_categories( array( 'parent'=>$categoria->cat_ID ) );
 
                            ?>
-                           <li class="selector-categoria shareW fontM h_10vh p0 button secondary" data-categoria="<?php echo $categoria -> cat_ID; ?>">
+                           <li class="selector-categoria shareW_md columns small-12 fontM h_10vh p0 button secondary" data-categoria="<?php echo $categoria -> cat_ID; ?>">
                               <div class="vcenter p0">
                                  <?php echo $categoria->name; ?>
                               </div>
@@ -130,7 +134,7 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                                  ?>
                                  <ul class="hidden">
                                     <?php foreach( $sub_categorias as $sub_categoria ) : ?>
-                                       <li class="selector-categoria shareW fontM h_10vh p0 button secondary" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
+                                       <li class="selector-categoria shareW_md fontM h_10vh p0 button secondary" data-categoria="<?php echo $sub_categoria -> cat_ID; ?>">
                                           <div class="vcenter p0">
                                              <?php echo $sub_categoria->name; ?>
                                           </div>
@@ -153,15 +157,6 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
                   </div>
 
 
-                  <div id="cargando-contenedor" class="columns w_100vw h_5vh rel mt2 z1k1 p0">
-                     <div class="columns mt2 p1 fontS bold white fwb ha text-right m0">
-                        <span class="black_bg p2">
-                           Cargando: <span class="cargando">0%</span>%
-                        </span>
-                     </div>
-                     <div id="cargando-barra" class="columns white_bg z1k1 m0" style="height:3px">
-                     </div>
-                  </div>
 
 
                </div><!-- #navegacion_archivo -->
@@ -173,3 +168,13 @@ $logo = get_stylesheet_directory_uri() . '/img/emergencialogo_grande.png';
          </div>
 
       </header>
+
+      <div id="cargando-contenedor" class="w_100vw h_5vh fixed mt2 z1k1 p0">
+         <div class="columns mt2 p1 fontS bold white fwb ha text-right m0">
+            <span class="black_bg p2">
+               Cargando: <span class="cargando">0%</span>%
+            </span>
+         </div>
+         <div id="cargando-barra" class="columns white_bg z1k1 m0" style="height:3px">
+         </div>
+      </div>

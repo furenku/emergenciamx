@@ -111,6 +111,9 @@ $(document).ready(function(){
          resizeTimeout = setTimeout(function(){
 
             u.shareW();
+            if( $(window).width()>960) {
+               u.shareW('.shareW_md');
+            }
             u.shareH();
             u.vcenter();
 
@@ -320,7 +323,7 @@ function setup_botones_categorias( botones ) {
 
          if( $("#barra-categorias .regresar").length == 0 ) {
 
-            regresar = $('<li>').addClass('shareW fontM h_10vh p0 button secondary tmp regresar')
+            regresar = $('<li>').addClass('shareW_md fontM h_10vh p0 button secondary tmp regresar')
             regresar.html('<div class="vcenter"><span class="fa fa-angle-left pr1"></span>Regresar</div>')
             regresar.prependTo('#barra-categorias')
 
@@ -343,7 +346,10 @@ function setup_botones_categorias( botones ) {
             $('#barra-categorias  > li').removeClass('hidden');
             u.vcenter('#barra-categorias .vcenter');
 
-            u.shareW('#barra-categorias > li');
+            if( $(window).width()>960) {
+               u.shareW('#barra-categorias > li');
+            }
+
             $('#videos').isotope({
                filter: '*',
                layoutMode: 'packery',

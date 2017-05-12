@@ -4786,12 +4786,16 @@ h1, h2, h3, h4, h5, h6 {
 hr {
   border-bottom: 1px solid #ddd; }
 
-@media (max-width: 640px) {
+@media (max-width: 960px) {
   #portada .contenido .columns {
     border-top: 2px solid #ba1620;
     padding-top: 15px; } }
 
-@media (min-width: 641px) {
+@media (min-width: 961px) {
   #portada .contenido .columns {
     border-left: 2px solid #ba1620;
     padding-left: 15px; } }
+
+#cargando-contenedor {
+  position: fixed !important;
+  bottom: 38px; }

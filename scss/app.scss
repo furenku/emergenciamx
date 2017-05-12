@@ -350,13 +350,20 @@ hr {
 
 #portada {
    .contenido .columns {
-      @media (max-width: 640px) {
+      @media (max-width: 960px) {
          border-top: 2px solid #ba1620;
          padding-top: $spacing;
       }
-      @media (min-width: 641px) {
+      @media (min-width: 961px) {
          border-left: 2px solid #ba1620;
          padding-left: $spacing;
       }
    }
+}
+
+
+#cargando-contenedor {
+   position: fixed !important;
+   bottom: 38px;
+
 }
